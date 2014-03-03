@@ -19,7 +19,7 @@ public class NewGroupCreation extends Base{
     returnToGroupsPage();
   }
   
-  @Test
+ /* @Test
   public void newEmptyGroup() throws Exception {
     openMainPage();
     goToGroupsPage();
@@ -28,6 +28,6 @@ public class NewGroupCreation extends Base{
 	fillGroupForm(group);
     submitNewGroupCreation();
     returnToGroupsPage();
-  }
+  }*/
 }
 
