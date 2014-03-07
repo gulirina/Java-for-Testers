@@ -4,9 +4,9 @@ import org.testng.annotations.Test;
 
 
 
-public class NewGroupCreation extends Base{
+public class TestNewGroupCreation extends Base{
   @Test
-  public void newGroup() throws Exception {
+  public void testNewGroupCreation() throws Exception {
     openMainPage();
     goToGroupsPage();
     initNewGroupCreation();

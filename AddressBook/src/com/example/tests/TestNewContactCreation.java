@@ -4,10 +4,10 @@ import org.testng.annotations.Test;
 
 
 
-public class NewContactCreation extends Base {
+public class TestNewContactCreation extends Base {
 
   @Test
-  public void NewContact() throws Exception {
+  public void testNewContactCreation() throws Exception {
     openMainPage();
     initNewContactCreation();
     ContactData contact = new ContactData();

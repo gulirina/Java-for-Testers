@@ -4,10 +4,10 @@ import org.testng.annotations.Test;
 
 
 
-public class TwiceContactCreation extends Base {
+public class TestTwiceContactCreation extends Base {
 
   @Test
-  public void NewContact() throws Exception {
+  public void testNewContactCreation() throws Exception {
     openMainPage();
     initNewContactCreation();
     ContactData contact = new ContactData();
