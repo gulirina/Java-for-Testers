@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 
 
-public class TestNewContactCreation extends Base {
+public class NewContactCreationTests extends Base {
 
   @Test
   public void testNewContactCreation() throws Exception {

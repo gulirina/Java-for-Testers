@@ -4,23 +4,23 @@ import org.testng.annotations.Test;
 
 
 
-public class TestNewGroupCreation extends Base{
+public class SecondNewGroupCreationTests extends Base{
   @Test
   public void testNewGroupCreation() throws Exception {
     openMainPage();
     goToGroupsPage();
     initNewGroupCreation();
     GroupData group = new GroupData();
-    group.groupname="Sparkle_Group";
-    group.header="sparkling_header";
-    group.footer="sparkling_footer";
+    group.groupname="Gulirina_Group";
+    group.header="Gulirina_header";
+    group.footer="Gulirina_footer";
 	fillGroupForm(group);
     submitNewGroupCreation();
     returnToGroupsPage();
   }
   
- /* @Test
-  public void newEmptyGroup() throws Exception {
+/* @Test
+  public void testNewEmptyGroupCreation() throws Exception {
     openMainPage();
     goToGroupsPage();
     initNewGroupCreation();

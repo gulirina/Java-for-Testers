@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 
 
-public class TestTwiceContactCreation extends Base {
+public class TwiceContactCreationTests extends Base {
 
   @Test
   public void testNewContactCreation() throws Exception {
@@ -27,7 +27,7 @@ public class TestTwiceContactCreation extends Base {
     contact.supPhone = "+9876543210";
 	fillContactForm(contact);
     submitNewContactCreation();
-    addNext(); //переходит не на домашнюю страницу, а на страницу создания контакта
+    addNext(); 
     ContactData contact1 = new ContactData();
     contact.firstName ="John";
     contact.secondName = "Doe";

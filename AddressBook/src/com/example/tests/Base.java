@@ -24,7 +24,7 @@ public class Base {
 	private StringBuffer verificationErrors = new StringBuffer();
 
 
-	//метод инициации
+	
 	@BeforeTest 
 	public void setUp() throws Exception {
 	    driver = new FirefoxDriver();
@@ -32,7 +32,7 @@ public class Base {
 	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	  }
 	
-	//метод завершения
+	
 	@AfterTest 
 	public void tearDown() throws Exception {
 	    driver.quit();
