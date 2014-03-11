@@ -44,4 +44,30 @@ public class ContactHelper extends HelperBase {
 		click(By.linkText("add new"));
 	}
 
+	public void showContactDetalis(int index) {
+		int cur_row = index+1; //because the first row is the header of the table
+		click(By.xpath("//tr[" + cur_row + "]//img[@title='Details']"));
+	}
+	
+	public void editContactDetails(int index) {
+		int cur_row = index+1; //because the first row is the header of the table
+		click(By.xpath("//tr[" + cur_row + "]//img[@title='Edit']"));
+	}
+
+	public void submitContactModification() {
+		click(By.xpath("//input[@value='Update']"));//I use xpath because buttons "Update" & "Delete" have the same names "update"		
+	}
+
+	public void deleteContact(int index) {
+		editContactDetails(index);
+		pressDeleteBtn();
+		}
+	
+	public void pressDeleteBtn() {
+		click(By.xpath("//input[@value='Delete']"));//I use xpath because buttons "Update" & "Delete" have the same names "update"
+	}
+	
+	public void initContactModification() {
+		click(By.xpath("//input[@name='modifiy']"));
+	}
 }
