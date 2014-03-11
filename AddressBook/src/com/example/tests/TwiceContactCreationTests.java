@@ -8,8 +8,8 @@ public class TwiceContactCreationTests extends Base {
 
   @Test
   public void testNewContactCreation() throws Exception {
-    openMainPage();
-    initNewContactCreation();
+    app.getNavigationHelper().openMainPage();
+    app.getContactHelper().initNewContactCreation();
     ContactData contact = new ContactData();
     contact.firstName ="Jane";
     contact.secondName = "Doe";
@@ -25,18 +25,18 @@ public class TwiceContactCreationTests extends Base {
     contact.groupName = "Gulirina_Group";
     contact.supAddress = "221b, Baker St";
     contact.supPhone = "+9876543210";
-	fillContactForm(contact);
-    submitNewContactCreation();
-    addNext(); 
+	app.getContactHelper().fillContactForm(contact);
+    app.getContactHelper().submitNewContactCreation();
+    app.getContactHelper().addNext(); 
     ContactData contact1 = new ContactData();
     contact.firstName ="John";
     contact.secondName = "Doe";
     contact.mainAddress = "10, Downing St";
     contact.hPhone = "555-12-46";
     contact.email1 = "johnny@doe.com";
-    fillContactForm(contact);
-    submitNewContactCreation();
-    goToHomePage();
+    app.getContactHelper().fillContactForm(contact);
+    app.getContactHelper().submitNewContactCreation();
+    app.getContactHelper().goToHomePage();
   }
 
 }

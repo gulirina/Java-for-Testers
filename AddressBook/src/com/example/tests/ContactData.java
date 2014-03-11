@@ -1,5 +1,7 @@
 package com.example.tests;
 
+import com.example.fw.ApplicationManager;
+
 public class ContactData {
 	public String firstName;
 	public String secondName;
@@ -16,7 +18,6 @@ public class ContactData {
 	public String supAddress;
 	public String supPhone;
 
-	
 	
 	public ContactData() {
 	}

@@ -7,27 +7,27 @@ import org.testng.annotations.Test;
 public class NewGroupCreationTests extends Base{
   @Test
   public void testNewGroupCreation() throws Exception {
-    openMainPage();
-    goToGroupsPage();
-    initNewGroupCreation();
+    app.getNavigationHelper().openMainPage();
+    app.getNavigationHelper().goToGroupsPage();
+    app.getGroupHelper().initNewGroupCreation();
     GroupData group = new GroupData();
     group.groupname="Sparkle_Group";
     group.header="sparkling_header";
     group.footer="sparkling_footer";
-	fillGroupForm(group);
-    submitNewGroupCreation();
-    returnToGroupsPage();
+	app.getGroupHelper().fillGroupForm(group);
+    app.getGroupHelper().submitNewGroupCreation();
+    app.getGroupHelper().returnToGroupsPage();
   }
   
- /* @Test
+ @Test
   public void testNewEmptyGroupCreation() throws Exception {
-    openMainPage();
-    goToGroupsPage();
-    initNewGroupCreation();
-    GroupData group = new GroupData("", "", "");
-	fillGroupForm(group);
-    submitNewGroupCreation();
-    returnToGroupsPage();
-  }*/
+    app.getNavigationHelper().openMainPage();
+    app.getNavigationHelper().goToGroupsPage();
+    app.getGroupHelper().initNewGroupCreation();
+    GroupData group = new GroupData(" "," "," ");
+    app.getGroupHelper().fillGroupForm(group);
+    app.getGroupHelper().submitNewGroupCreation();
+    app.getGroupHelper().returnToGroupsPage();
+  }
 }
 

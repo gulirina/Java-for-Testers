@@ -8,8 +8,8 @@ public class NewContactCreationTests extends Base {
 
   @Test
   public void testNewContactCreation() throws Exception {
-    openMainPage();
-    initNewContactCreation();
+    app.getNavigationHelper().openMainPage();
+    app.getContactHelper().initNewContactCreation();
     ContactData contact = new ContactData();
     contact.firstName ="Jane";
     contact.secondName = "Doe";
@@ -25,9 +25,9 @@ public class NewContactCreationTests extends Base {
     contact.groupName = "Sparkle_Group";
     contact.supAddress = "221b, Baker St";
     contact.supPhone = "+9876543210";
-	fillContactForm(contact);
-    submitNewContactCreation();
-    goToHomePage();
+	app.getContactHelper().fillContactForm(contact);
+    app.getContactHelper().submitNewContactCreation();
+    app.getContactHelper().goToHomePage();
   }
   
 

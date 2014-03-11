@@ -1,10 +1,13 @@
 package com.example.tests;
 
+import com.example.fw.ApplicationManager;
+
 public class GroupData {
 	public String groupname;
 	public String header;
 	public String footer;
-
+	
+	
 	public GroupData() {
 		
 	}
