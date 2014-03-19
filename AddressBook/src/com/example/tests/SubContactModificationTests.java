@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 public class SubContactModificationTests extends Base {
 	
 	@Test
-	public void ModifySomeContact() {
+	public void modifySomeContact() {
 		app.getNavigationHelper().openMainPage();
 		app.getContactHelper().showContactDetalis(1);
 		app.getContactHelper().initContactModification();

@@ -1,7 +1,6 @@
 package com.example.fw;
 
 import org.openqa.selenium.By;
-
 import com.example.tests.Base;
 import com.example.tests.ContactData;
 
@@ -58,16 +57,20 @@ public class ContactHelper extends HelperBase {
 		click(By.xpath("//input[@value='Update']"));//I use xpath because buttons "Update" & "Delete" have the same names "update"		
 	}
 
-	public void deleteContact(int index) {
-		editContactDetails(index);
-		pressDeleteBtn();
-		}
-	
 	public void pressDeleteBtn() {
 		click(By.xpath("//input[@value='Delete']"));//I use xpath because buttons "Update" & "Delete" have the same names "update"
-	}
+	} 
 	
 	public void initContactModification() {
 		click(By.xpath("//input[@name='modifiy']"));
 	}
+	
+	public void deleteContact(int index) {
+		editContactDetails(index);
+		pressDeleteBtn();
+	}
+	
+	
+	
+	
 }
