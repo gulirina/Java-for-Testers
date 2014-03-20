@@ -9,15 +9,12 @@ import org.testng.annotations.Test;
 
 public class ContactModificationTests extends Base {
 	
-	@Test
-	public void modifySomeContact(){
+	@Test(dataProvider = "randomValidContactGenerator")
+	public void modifySomeContact(ContactData contact){
 		app.getNavigationHelper().openMainPage();
 		//check existance
 		List<ContactData> oldList = app.getContactHelper().getContacts();
 		if(oldList.size()==0){
-			ContactData contact = new ContactData();
-			contact.firstName = "Ann";
-			contact.secondName = "Shirley";
 			app.getContactHelper().quickContactCreation(contact);			
 		 }
 		 else{
@@ -28,9 +25,6 @@ public class ContactModificationTests extends Base {
 		int index = 1 + app.getContactHelper().chooseRandomContact(oldList);
 		//action
 		app.getContactHelper().editContactDetails(index);
-		ContactData contact = new ContactData();
-		contact.firstName = "Helene";
-		contact.secondName = "Rolles";
 		app.getContactHelper().fillContactForm(contact);
 		app.getContactHelper().submitContactModification();
 		app.getContactHelper().goToHomePage();	

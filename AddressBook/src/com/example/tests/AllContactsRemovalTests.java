@@ -34,5 +34,4 @@ public class AllContactsRemovalTests extends Base {
 			} while(oldList.size()!=0);
 		}
 	}
-
 }

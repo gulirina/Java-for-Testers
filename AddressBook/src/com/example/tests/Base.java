@@ -38,7 +38,33 @@ public class Base {
 	  return list.iterator();
   }
 	
-  
+	@DataProvider
+	public Iterator<Object[]> randomValidContactGenerator() {
+	  List<Object[]> list = new ArrayList<Object[]>();
+	  Random rnd = new Random();
+	  for(int i=0;i<5;i++){
+		  ContactData contact = new ContactData();
+		  contact.firstName = generateRandomString();
+		  contact.secondName= generateRandomString();
+		  contact.mainAddress= generateRandomString();
+		  contact.hPhone= generateRandomString();
+		  contact.mPhone= generateRandomString();
+		  contact.wPhone= generateRandomString();
+		  contact.email1= generateRandomString();
+		  contact.email2= generateRandomString();
+		  contact.bDay= generateRandomNumber(31);
+		  // contact.bMonth= " ";
+		  contact.bYear= generateRandomNumber(2013);
+		  //contact.groupName= " ";
+		  contact.supAddress= generateRandomString();
+		  contact.supPhone= generateRandomString();
+		  list.add(new Object[]{contact});
+	  }
+	  //..
+	  return list.iterator();
+	  
+  }	
+	  
   public String generateRandomString() {
 	  Random rnd = new Random();
 	  if(rnd.nextInt(3)==0) {
@@ -47,5 +73,13 @@ public class Base {
 	  else {
 		  return "test"+rnd.nextInt();
 	  }
-  }	  
+  }	 
+  
+  public String generateRandomNumber(int limit){
+	  Random rnd = new Random();
+	  int number = 1+rnd.nextInt(limit);
+	  String num = ""+number+"";
+	  return num;
+  }
+  	
 }
