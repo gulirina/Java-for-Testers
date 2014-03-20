@@ -1,8 +1,15 @@
 package com.example.fw;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
 import com.example.tests.Base;
 import com.example.tests.ContactData;
+import com.example.tests.GroupData;
 
 public class ContactHelper extends HelperBase {
 
@@ -70,7 +77,31 @@ public class ContactHelper extends HelperBase {
 		pressDeleteBtn();
 	}
 	
+	public void quickContactCreation(ContactData contact) {
+		initNewContactCreation();
+		fillContactForm(contact);
+	    submitNewContactCreation();
+	    goToHomePage();
+	}
+
+	public List<ContactData> getContacts() {
+		List<ContactData> contacts = new ArrayList<ContactData>();
+		List<WebElement> lines = driver.findElements(By.xpath("//tr[@name='entry']//td[2]"));
+		for (WebElement line : lines) {
+			ContactData contact = new ContactData();
+			String name = line.getText();
+			contact.secondName = name;
+			contacts.add(contact);
+		}
+		return contacts;
+		
+	}
 	
+	public int chooseRandomContact(List<ContactData> oldList) {
+		Random  rnd = new Random();
+	    int index = rnd.nextInt(oldList.size());
+		return index;
+	}
 	
 	
 }

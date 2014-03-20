@@ -1,34 +1,28 @@
 package com.example.tests;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.testng.annotations.Test;
-
-
+import static org.testng.Assert.assertEquals;
 
 public class NewContactCreationTests extends Base {
 
   @Test
   public void testNewContactCreation() throws Exception {
     app.getNavigationHelper().openMainPage();
-    app.getContactHelper().initNewContactCreation();
+    //save old
+    List<ContactData> oldList = app.getContactHelper().getContacts();
+    //action   
     ContactData contact = new ContactData();
-    contact.firstName ="Jane";
-    contact.secondName = "Doe";
-    contact.mainAddress = "10, Downing St";
-    contact.hPhone = "+9876543210";
-    contact.mPhone = "+9876543210";
-    contact.wPhone = "+9876543210";
-    contact.email1 = "jane@doe.com";
-    contact.email2 = "jane.doe@home.com";
-    contact.bDay = "18";
-    contact.bMonth = "August";
-    contact.bYear = "1987";
-    contact.groupName = "Sparkle_Group";
-    contact.supAddress = "221b, Baker St";
-    contact.supPhone = "+9876543210";
-	app.getContactHelper().fillContactForm(contact);
-    app.getContactHelper().submitNewContactCreation();
-    app.getContactHelper().goToHomePage();
+    contact.firstName ="Amelie";
+    contact.secondName = "Poulain";
+    app.getContactHelper().quickContactCreation(contact);
+    //save new state
+    List<ContactData> newList = app.getContactHelper().getContacts();
+    //compare states
+    oldList.add(contact);
+    Collections.sort(oldList);
+    assertEquals(newList, oldList);
   }
-  
-
 }

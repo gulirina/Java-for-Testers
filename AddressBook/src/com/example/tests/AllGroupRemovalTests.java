@@ -15,7 +15,7 @@ public class AllGroupRemovalTests extends Base{
 		//check existence
 		List<GroupData> oldList = app.getGroupHelper().getGroups();
 		if(oldList.size()==0){
-			//assertEquals(oldList.size(),0);
+			//...
 		}
 		else{
 			do {
@@ -36,5 +36,4 @@ public class AllGroupRemovalTests extends Base{
 		
 		
 	}
-
 }

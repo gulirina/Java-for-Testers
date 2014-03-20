@@ -1,42 +1,44 @@
 package com.example.tests;
 
+import static org.testng.Assert.assertEquals;
+
+import java.util.Collections;
+import java.util.List;
+
 import org.testng.annotations.Test;
-
-
 
 public class TwiceContactCreationTests extends Base {
 
   @Test
   public void testNewContactCreation() throws Exception {
     app.getNavigationHelper().openMainPage();
-    app.getContactHelper().initNewContactCreation();
+    
+    
+    //save old
+    List<ContactData> oldList = app.getContactHelper().getContacts();
+    //action    
     ContactData contact = new ContactData();
     contact.firstName ="Jane";
-    contact.secondName = "Doe";
-    contact.mainAddress = "10, Downing St";
-    contact.hPhone = "+9876543210";
-    contact.mPhone = "+9876543210";
-    contact.wPhone = "+9876543210";
-    contact.email1 = "jane@doe.com";
-    contact.email2 = "jane.doe@home.com";
-    contact.bDay = "18";
-    contact.bMonth = "August";
-    contact.bYear = "1987";
-    contact.groupName = "Gulirina_Group";
-    contact.supAddress = "221b, Baker St";
-    contact.supPhone = "+9876543210";
+    contact.secondName = "Marple";
+    app.getContactHelper().initNewContactCreation();
 	app.getContactHelper().fillContactForm(contact);
     app.getContactHelper().submitNewContactCreation();
-    app.getContactHelper().addNext(); 
+    //add first contact
+    oldList.add(contact);
+    
+    app.getContactHelper().addNext();
     ContactData contact1 = new ContactData();
-    contact.firstName ="John";
-    contact.secondName = "Doe";
-    contact.mainAddress = "10, Downing St";
-    contact.hPhone = "555-12-46";
-    contact.email1 = "johnny@doe.com";
-    app.getContactHelper().fillContactForm(contact);
+    contact1.firstName ="Hercules";
+    contact1.secondName = "Poirot";
+    app.getContactHelper().fillContactForm(contact1);
     app.getContactHelper().submitNewContactCreation();
     app.getContactHelper().goToHomePage();
+    //save new
+    List<ContactData> newList = app.getContactHelper().getContacts();
+    //compare states
+    oldList.add(contact1);
+    Collections.sort(oldList);
+    assertEquals(newList, oldList);
   }
 
 }
