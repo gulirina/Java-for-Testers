@@ -11,7 +11,7 @@ public class SubContactRemovalTests extends Base {
 	
 	@Test
 	public void deleteSomeContact() {
-		app.getNavigationHelper().openMainPage();
+		app.navigateTo().mainPage();
 		//check existance
 		List<ContactData> oldList = app.getContactHelper().getContacts();
 		if(oldList.size()==0){
@@ -25,7 +25,7 @@ public class SubContactRemovalTests extends Base {
 		}
 		//save old
 		oldList = app.getContactHelper().getContacts();
-		int index = 1 + app.getContactHelper().chooseRandomContact(oldList);
+		int index = 1 + app.getCommonHelper().chooseRandom(oldList);
 		app.getContactHelper().showContactDetalis(index);
 		app.getContactHelper().initContactModification();
 		app.getContactHelper().pressDeleteBtn();

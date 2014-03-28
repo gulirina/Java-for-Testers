@@ -11,7 +11,7 @@ public class AllContactsRemovalTests extends Base {
 	
 	@Test
 	public void removeAllContacts(){
-		app.getNavigationHelper().openMainPage();
+		app.navigateTo().mainPage();
 		//check existance
 		List<ContactData> oldList = app.getContactHelper().getContacts();
 		if(oldList.size()==0){
@@ -21,7 +21,7 @@ public class AllContactsRemovalTests extends Base {
 			do {
 				//save old
 				oldList = app.getContactHelper().getContacts();
-				int index = 1 + app.getContactHelper().chooseRandomContact(oldList);
+				int index = 1 + app.getCommonHelper().chooseRandom(oldList);
 				//action
 				app.getContactHelper().deleteContact(index);
 				app.getContactHelper().goToHomePage();

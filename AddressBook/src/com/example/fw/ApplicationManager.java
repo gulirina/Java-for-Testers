@@ -13,19 +13,21 @@ public class ApplicationManager {
 	private NavigationHelper navigationHelper;
 	private GroupHelper groupHelper;
 	private ContactHelper contactHelper;
+	private CommonHelper commonHelper;
 	
 	
 	public ApplicationManager() {
 		driver = new FirefoxDriver();
 	    baseUrl = "http://localhost/";
 	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);	
+		driver.get(baseUrl + "/addressbookv4.1.4/");
 	}
 	
 	public void stop() {
 		driver.quit();	   	
 	}
 
-	public NavigationHelper getNavigationHelper() {
+	public NavigationHelper navigateTo() {
 		if (navigationHelper == null) {
 			navigationHelper = new NavigationHelper(this);
 		}
@@ -44,6 +46,13 @@ public class ApplicationManager {
 			contactHelper = new ContactHelper(this);
 		}
 		return contactHelper;
+	}
+	
+	public CommonHelper getCommonHelper() {
+		if (commonHelper == null) {
+			commonHelper = new CommonHelper(this);
+		}
+		return commonHelper;
 	}
 
 }

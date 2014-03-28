@@ -12,7 +12,7 @@ public class ContactRemovalTests extends Base {
 	@Test
 	public void deleteSomeContact(){
 		
-		app.getNavigationHelper().openMainPage();
+		app.navigateTo().mainPage();
 		
 		//check existance
 		List<ContactData> oldList = app.getContactHelper().getContacts();
@@ -27,7 +27,7 @@ public class ContactRemovalTests extends Base {
 		}
 		//save old
 		oldList = app.getContactHelper().getContacts();
-		int index = 1 + app.getContactHelper().chooseRandomContact(oldList);
+		int index = 1 + app.getCommonHelper().chooseRandom(oldList);
 		//action
 		app.getContactHelper().deleteContact(index);
 		app.getContactHelper().goToHomePage();

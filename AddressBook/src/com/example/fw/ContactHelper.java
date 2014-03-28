@@ -13,6 +13,9 @@ import com.example.tests.GroupData;
 
 public class ContactHelper extends HelperBase {
 
+	public static boolean CREATION = true;
+	public static boolean MODIFICATION = false;
+	
 	public ContactHelper(ApplicationManager manager) {
 		super(manager);
 	}
@@ -29,7 +32,7 @@ public class ContactHelper extends HelperBase {
 		click(By.name("submit"));
 	}
 
-	public void fillContactForm(ContactData contact) {
+	public void fillContactForm(ContactData contact,boolean formType) {
 		type(By.name("firstname"), contact.firstName);
 		type(By.name("lastname"), contact.secondName);
 	    type(By.name("address"), contact.mainAddress);
@@ -41,7 +44,14 @@ public class ContactHelper extends HelperBase {
 	    selectByText(By.name("bday"), contact.bDay);
 	    selectByText(By.name("bmonth"), contact.bMonth);
 	    type(By.name("byear"), contact.bYear);
-	    //selectByText(By.name("new_group"), contact.groupName);
+	    if (formType==CREATION) {
+	    	//selectByText(By.name("new_group"), contact.groupName);
+		}
+	    else {
+	    	if(driver.findElements(By.name("new_group")).size()!=0){
+	    		throw new Error("Group selector existsin contact modification form");
+	    	}
+	    }
 	    type(By.name("address2"), contact.supAddress);
 	    type(By.name("phone2"), contact.supPhone);
 	}
@@ -79,29 +89,30 @@ public class ContactHelper extends HelperBase {
 	
 	public void quickContactCreation(ContactData contact) {
 		initNewContactCreation();
-		fillContactForm(contact);
+		fillContactForm(contact, false);
 	    submitNewContactCreation();
 	    goToHomePage();
 	}
 
 	public List<ContactData> getContacts() {
 		List<ContactData> contacts = new ArrayList<ContactData>();
-		List<WebElement> lines = driver.findElements(By.xpath("//tr[@name='entry']//td[2]"));
+		List<WebElement> lines = driver.findElements(By.xpath("//tr[@name='entry']"));
 		for (WebElement line : lines) {
 			ContactData contact = new ContactData();
-			String name = line.getText();
+			String name = ""+line.findElement(By.xpath("//tr[@name='entry']//td[2]"))+" "+line.findElement(By.xpath("//tr[@name='entry']//td[3]"))+"";
 			contact.secondName = name;
 			contacts.add(contact);
 		}
 		return contacts;
 		
 	}
-	
-	public int chooseRandomContact(List<ContactData> oldList) {
+	;
+		public int chooseRandomContact(List<ContactData> oldList) {
 		Random  rnd = new Random();
 	    int index = rnd.nextInt(oldList.size());
 		return index;
 	}
+	
 	
 	
 }

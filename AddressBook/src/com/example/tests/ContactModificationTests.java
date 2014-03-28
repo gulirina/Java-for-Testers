@@ -11,7 +11,7 @@ public class ContactModificationTests extends Base {
 	
 	@Test(dataProvider = "randomValidContactGenerator")
 	public void modifySomeContact(ContactData contact){
-		app.getNavigationHelper().openMainPage();
+		app.navigateTo().mainPage();
 		//check existance
 		List<ContactData> oldList = app.getContactHelper().getContacts();
 		if(oldList.size()==0){
@@ -22,10 +22,10 @@ public class ContactModificationTests extends Base {
 		 }
 		//save old
 		oldList = app.getContactHelper().getContacts();
-		int index = 1 + app.getContactHelper().chooseRandomContact(oldList);
+		int index = 1 + app.getCommonHelper().chooseRandom(oldList);
 		//action
 		app.getContactHelper().editContactDetails(index);
-		app.getContactHelper().fillContactForm(contact);
+		app.getContactHelper().fillContactForm(contact, true);
 		app.getContactHelper().submitContactModification();
 		app.getContactHelper().goToHomePage();	
 		//save new state
