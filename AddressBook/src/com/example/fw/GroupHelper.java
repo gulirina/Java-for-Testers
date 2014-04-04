@@ -16,16 +16,24 @@ public class GroupHelper extends HelperBase{
 		super(manager);
 	}
 	
+	private List<GroupData> cachedGroups;
+	
 	public List<GroupData> getGroups() {
-		List<GroupData> groups = new ArrayList<GroupData>();
+		if (cachedGroups==null){
+			rebildCache();
+		}
+		return cachedGroups;
+	}
+	
+	private void rebildCache() {
+		List<GroupData> cachedGroups = new ArrayList<GroupData>();
 		manager.navigateTo().groupsPage();
 		List<WebElement> checkboxes = driver.findElements(By.name("selected[]"));
 		for (WebElement checkbox : checkboxes) {
 			String title = checkbox.getAttribute("title");
 			String groupname = title.substring("Select (".length(),title.length()-")".length());
-			groups.add(new GroupData().withGroupname(groupname));
-		}
-		return groups;
+			cachedGroups.add(new GroupData().withGroupname(groupname));
+		}	
 	}
 
 	public GroupHelper createGroup(GroupData group) {
