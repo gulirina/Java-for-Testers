@@ -1,17 +1,19 @@
 package com.example.tests;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.junit.Assert.assertThat;
+import java.util.Collections;
+import java.util.List;
+import static org.testng.Assert.assertEquals;
+
 import org.testng.annotations.Test;
-import com.example.utils.SortedListOf;
 
 public class AllGroupRemovalTests extends Base{
 	
 	@Test
 	public void removeAllGroups() {
 		//check existence
-		SortedListOf<GroupData> oldList = app.getGroupHelper().getGroups();
+		List<GroupData> oldList = app.getGroupHelper().getGroups();
 		if(oldList.size()==0){
+			//...
 		}
 		else{
 			do {
@@ -19,12 +21,14 @@ public class AllGroupRemovalTests extends Base{
 				oldList = app.getGroupHelper().getGroups();
 				int index = app.getCommonHelper().chooseRandom(oldList);
 				//actions
-				app.getGroupHelper().deleteGroup(index); //or we can use a constant
+				app.getGroupHelper().deleteGroup(index);//or we can use a constant
 				//save new
-				SortedListOf<GroupData> newList = app.getGroupHelper().getGroups();
+				List<GroupData> newList = app.getGroupHelper().getGroups();
 				//compare states
-				assertThat(newList,equalTo(oldList.without(index)));	
+				oldList.remove(index);
+				Collections.sort(oldList);
+				assertEquals(newList, oldList);		
 			} while(oldList.size()!=0);
-		}
+		}		
 	}
 }

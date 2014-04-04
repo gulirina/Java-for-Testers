@@ -1,5 +1,7 @@
 package com.example.fw;
 
+import static com.example.fw.ContactHelper.MODIFICATION;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -12,107 +14,149 @@ import com.example.tests.ContactData;
 import com.example.tests.GroupData;
 
 public class ContactHelper extends HelperBase {
-
-	public static boolean CREATION = true;
-	public static boolean MODIFICATION = false;
 	
+public static boolean CREATION = true;
+public static boolean MODIFICATION = false;
+
 	public ContactHelper(ApplicationManager manager) {
 		super(manager);
 	}
 
-	public void goToHomePage() {
-		click(By.linkText("home page"));
-	}
-
-	public void addNext() {
-		click(By.linkText("add next"));
-	}
-
-	public void submitNewContactCreation() {
-		click(By.name("submit"));
-	}
-
-	public void fillContactForm(ContactData contact,boolean formType) {
-		type(By.name("firstname"), contact.firstName);
-		type(By.name("lastname"), contact.secondName);
-	    type(By.name("address"), contact.mainAddress);
-	    type(By.name("home"), contact.hPhone);
-	    type(By.name("mobile"), contact.mPhone);
-	    type(By.name("work"), contact.wPhone);
-	    type(By.name("email"), contact.email1);
-	    type(By.name("email2"),contact.email2);
-	    selectByText(By.name("bday"), contact.bDay);
-	    selectByText(By.name("bmonth"), contact.bMonth);
-	    type(By.name("byear"), contact.bYear);
-	    if (formType==CREATION) {
-	    	//selectByText(By.name("new_group"), contact.groupName);
-		}
-	    else {
-	    	if(driver.findElements(By.name("new_group")).size()!=0){
-	    		throw new Error("Group selector existsin contact modification form");
-	    	}
-	    }
-	    type(By.name("address2"), contact.supAddress);
-	    type(By.name("phone2"), contact.supPhone);
-	}
-
-	public void initNewContactCreation() {
-		click(By.linkText("add new"));
-	}
-
-	public void showContactDetalis(int index) {
-		int cur_row = index+1; //because the first row is the header of the table
-		click(By.xpath("//tr[" + cur_row + "]//img[@title='Details']"));
-	}
-	
-	public void editContactDetails(int index) {
-		int cur_row = index+1; //because the first row is the header of the table
-		click(By.xpath("//tr[" + cur_row + "]//img[@title='Edit']"));
-	}
-
-	public void submitContactModification() {
-		click(By.xpath("//input[@value='Update']"));//I use xpath because buttons "Update" & "Delete" have the same names "update"		
-	}
-
-	public void pressDeleteBtn() {
-		click(By.xpath("//input[@value='Delete']"));//I use xpath because buttons "Update" & "Delete" have the same names "update"
-	} 
-	
-	public void initContactModification() {
-		click(By.xpath("//input[@name='modifiy']"));
-	}
-	
-	public void deleteContact(int index) {
-		editContactDetails(index);
-		pressDeleteBtn();
-	}
-	
-	public void quickContactCreation(ContactData contact) {
-		initNewContactCreation();
-		fillContactForm(contact, false);
-	    submitNewContactCreation();
-	    goToHomePage();
-	}
-
-	public List<ContactData> getContacts() {
+	public List<ContactData> getContacts(){
 		List<ContactData> contacts = new ArrayList<ContactData>();
-		List<WebElement> lines = driver.findElements(By.xpath("//tr[@name='entry']"));
+		manager.navigateTo().mainPage();
+		List<WebElement> lines = driver.findElements(By.xpath("//tr[@name='entry']//td[2]"));
 		for (WebElement line : lines) {
-			ContactData contact = new ContactData();
-			String name = ""+line.findElement(By.xpath("//tr[@name='entry']//td[2]"))+" "+line.findElement(By.xpath("//tr[@name='entry']//td[3]"))+"";
-			contact.secondName = name;
-			contacts.add(contact);
+			String name = line.getText();
+			String secondName = name;
+			contacts.add(new ContactData().withSecondName(secondName));
 		}
 		return contacts;
 		
+	}	
+	
+	public ContactHelper createContact(ContactData contact) {
+		initNewContactCreation();
+		fillContactForm(contact, CREATION);
+	    submitNewContactCreation();
+	    goToHomePage();
+	    return this;
 	}
-	;
-		public int chooseRandomContact(List<ContactData> oldList) {
-		Random  rnd = new Random();
-	    int index = rnd.nextInt(oldList.size());
-		return index;
+	
+	public ContactHelper modifyContact(int index, ContactData contact) {
+		manager.navigateTo().mainPage();
+		editContactDetails(index);
+		fillContactForm(contact, MODIFICATION);
+		submitContactModification();
+		goToHomePage();
+		return this;
+		
 	}
 	
+	public ContactHelper subModifyContact(int index, ContactData contact) {
+		manager.navigateTo().mainPage();
+		showContactDetalis(index);
+		initContactModification();
+		fillContactForm(contact, MODIFICATION);
+		submitContactModification();	
+		goToHomePage();
+		return this;
+	}
 	
+	public ContactHelper deleteContact(int index) {
+		manager.navigateTo().mainPage();
+		editContactDetails(index);
+		submitContactDeletion();
+		goToHomePage();
+		return this;
+	}
 	
+	public ContactHelper subDeleteContact(int index) {
+		manager.navigateTo().mainPage();
+		showContactDetalis(index);	
+		initContactModification();
+		submitContactDeletion();
+		goToHomePage();
+		return this;
+	}
+	
+//================================================================================	
+	
+	public ContactHelper fillContactForm(ContactData contact,boolean formType) {
+		type(By.name("firstname"), contact.getFirstName());
+		type(By.name("lastname"), contact.getSecondName());
+	    type(By.name("address"), contact.getMainAddress());
+	    type(By.name("home"), contact.getHPhone());
+	    type(By.name("mobile"), contact.getMPhone());
+	    type(By.name("work"), contact.getWPhone());
+	    type(By.name("email"), contact.getEmail1());
+	    type(By.name("email2"),contact.getEmail2());
+	    selectByText(By.name("bday"), contact.getBDay());
+	    selectByText(By.name("bmonth"), contact.getBMonth());
+	    type(By.name("byear"), contact.getBYear());
+	    if(formType == CREATION){
+	    	//selectByText(By.name("new_group"), contact.getGroupName());
+	    }
+	    else {
+	    	if(driver.findElements(By.name("new_group")).size()!=0){
+	    		throw new Error("Group selector exists in contact modification form");
+	    	}
+	    }
+	    type(By.name("address2"), contact.getSupAddress());
+	    type(By.name("phone2"), contact.getSupPhone());
+	    return this;
+	}
+	
+	public ContactHelper initNewContactCreation() {
+		click(By.linkText("add new"));
+		return this;
+	}
+	
+	public ContactHelper initContactModification() {
+		click(By.xpath("//input[@name='modifiy']"));
+		return this;
+	}
+	
+	public ContactHelper submitNewContactCreation() {
+		click(By.name("submit"));
+		return this;
+	}
+	
+	public ContactHelper submitContactModification() {
+		click(By.xpath("//input[@value='Update']"));
+		return this;
+	}
+	
+	public ContactHelper showContactDetalis(int index) {
+		int cur_row = index+1; //because the first row is the header of the table
+		click(By.xpath("//tr[" + cur_row + "]//img[@title='Details']"));
+		return this;
+	}
+	
+	public ContactHelper editContactDetails(int index) {
+		int cur_row = index+1; //because the first row is the header of the table
+		click(By.xpath("//tr[" + cur_row + "]//img[@title='Edit']"));
+		return this;
+	}
+
+	public ContactHelper submitContactDeletion() {
+		click(By.xpath("//input[@value='Delete']"));
+		return this;
+	} 
+	
+	public ContactHelper goToHomePage() {
+		click(By.linkText("home page"));
+		return this;
+	}
+
+	public ContactHelper addNext() {
+		click(By.linkText("add next"));
+		return this;
+	}
+
+
+
+
+
+
 }

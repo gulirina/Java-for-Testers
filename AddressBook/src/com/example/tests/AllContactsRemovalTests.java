@@ -24,7 +24,6 @@ public class AllContactsRemovalTests extends Base {
 				int index = 1 + app.getCommonHelper().chooseRandom(oldList);
 				//action
 				app.getContactHelper().deleteContact(index);
-				app.getContactHelper().goToHomePage();
 				//save new
 				List<ContactData> newList = app.getContactHelper().getContacts();
 				//compare states

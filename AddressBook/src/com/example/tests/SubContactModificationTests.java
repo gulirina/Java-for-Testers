@@ -7,16 +7,17 @@ import java.util.List;
 
 import org.testng.annotations.Test;
 
+import static com.example.fw.ContactHelper.MODIFICATION;;
+
 public class SubContactModificationTests extends Base {
-	
+
+
 	@Test(dataProvider = "randomValidContactGenerator")
 	public void modifySomeContact(ContactData contact) {
-		app.navigateTo().mainPage();
-		app.navigateTo().mainPage();
 		//check existance
 		List<ContactData> oldList = app.getContactHelper().getContacts();
 		if(oldList.size()==0){
-			app.getContactHelper().quickContactCreation(contact);			
+			app.getContactHelper().createContact(contact);			
 		 }
 		 else{
 			 //...
@@ -24,11 +25,7 @@ public class SubContactModificationTests extends Base {
 		//save old
 		oldList = app.getContactHelper().getContacts();
 		int index = 1 + app.getCommonHelper().chooseRandom(oldList);
-		app.getContactHelper().showContactDetalis(index);
-		app.getContactHelper().initContactModification();
-		app.getContactHelper().fillContactForm(contact, true);
-		app.getContactHelper().submitContactModification();
-		app.getContactHelper().goToHomePage();
+		app.getContactHelper().subModifyContact(index, contact);
 		//save new state
 	    List<ContactData> newList = app.getContactHelper().getContacts();
 	    //compare states

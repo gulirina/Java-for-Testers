@@ -30,7 +30,7 @@ public class Base {
 	  List<Object[]> list = new ArrayList<Object[]>();
 	  for(int i=0;i<5;i++) {
 		  GroupData group = new GroupData()
-		  	.withName(generateRandomString())
+		  	.withGroupname(generateRandomString())
 		  	.withHeader(generateRandomString())
 		  	.withFooter(generateRandomString());
 		  list.add(new Object[]{group});
@@ -38,26 +38,27 @@ public class Base {
 	  return list.iterator();
   }
 	
+
 	@DataProvider
 	public Iterator<Object[]> randomValidContactGenerator() {
 	  List<Object[]> list = new ArrayList<Object[]>();
 	  Random rnd = new Random();
 	  for(int i=0;i<5;i++){
-		  ContactData contact = new ContactData();
-		  contact.firstName = generateRandomString();
-		  contact.secondName= generateRandomString();
-		  contact.mainAddress= generateRandomString();
-		  contact.hPhone= generateRandomString();
-		  contact.mPhone= generateRandomString();
-		  contact.wPhone= generateRandomString();
-		  contact.email1= generateRandomString();
-		  contact.email2= generateRandomString();
-		  contact.bDay= generateRandomNumber(31);
-		  // contact.bMonth= " ";
-		  contact.bYear= generateRandomNumber(2013);
-		  //contact.groupName= " ";
-		  contact.supAddress= generateRandomString();
-		  contact.supPhone= generateRandomString();
+		  ContactData contact = new ContactData()
+		  	.withFirstName(generateRandomString())
+		  	.withSecondName(generateRandomString())
+		  	.withMainAddress(generateRandomString())
+		  	.withHPhone(generateRandomString())
+		  	.withMPhone(generateRandomString())
+		  	.withWPhone(generateRandomString())
+		  	.withEmail1(generateRandomString())
+		  	.withEmail2(generateRandomString())
+		  	.withBDay("1")
+		  	.withBMonth("August")
+		  	.withBYear("1970")
+		  	//.withGroupName(generateRandomString())
+		  	.withSupAddress(generateRandomString())
+		  	.withSupPhone(generateRandomString());		  
 		  list.add(new Object[]{contact});
 	  }
 	  //..

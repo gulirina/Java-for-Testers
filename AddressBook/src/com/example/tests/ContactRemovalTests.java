@@ -18,9 +18,7 @@ public class ContactRemovalTests extends Base {
 		List<ContactData> oldList = app.getContactHelper().getContacts();
 		if(oldList.size()==0){
 			ContactData contact = new ContactData();
-			contact.firstName = "Ann";
-			contact.secondName = "Shirley";
-			app.getContactHelper().quickContactCreation(contact);			
+			app.getContactHelper().createContact(contact);			
 		}
 		else{
 			//...
@@ -30,7 +28,7 @@ public class ContactRemovalTests extends Base {
 		int index = 1 + app.getCommonHelper().chooseRandom(oldList);
 		//action
 		app.getContactHelper().deleteContact(index);
-		app.getContactHelper().goToHomePage();
+		
 		//save new
 		List<ContactData> newList = app.getContactHelper().getContacts();
 		//compare states
