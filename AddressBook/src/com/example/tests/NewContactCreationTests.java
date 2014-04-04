@@ -1,17 +1,9 @@
 package com.example.tests;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
-
-import static com.example.fw.ContactHelper.CREATION;
-
 import static org.testng.Assert.assertEquals;
+import java.util.Collections;
+import java.util.List;
+import org.testng.annotations.Test;
 
 public class NewContactCreationTests extends Base {
 	

@@ -21,9 +21,7 @@ public class ContactData implements Comparable<ContactData> {
 
 	
 	public ContactData() {
-	}
-	
-	
+	}	
 	
 	@Override
 	public String toString() {

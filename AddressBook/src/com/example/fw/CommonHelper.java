@@ -14,5 +14,4 @@ public class CommonHelper extends HelperBase {
 	    int index = rnd.nextInt(list.size());
 		return index;
 	}
-
 }

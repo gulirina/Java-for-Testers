@@ -1,6 +1,5 @@
 package com.example.tests;
 
-import com.example.fw.ApplicationManager;
 
 public class GroupData implements Comparable<GroupData> {
 	private String groupname;

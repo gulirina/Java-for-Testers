@@ -81,6 +81,5 @@ public class Base {
 	  int number = 1+rnd.nextInt(limit);
 	  String num = ""+number+"";
 	  return num;
-  }
-  	
+  }  	
 }

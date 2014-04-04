@@ -4,7 +4,6 @@ import static org.testng.Assert.assertEquals;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 import org.testng.annotations.Test;
 

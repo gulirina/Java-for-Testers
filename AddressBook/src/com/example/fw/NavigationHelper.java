@@ -33,6 +33,4 @@ public class NavigationHelper extends HelperBase {
 	private boolean onMainPage() {
 		return driver.findElements(By.id("maintable")).size()>0;
 	}
-
-
 }

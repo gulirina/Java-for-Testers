@@ -2,12 +2,10 @@ package com.example.fw;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.example.tests.Base;
 import com.example.tests.GroupData;
 
 public class GroupHelper extends HelperBase{
@@ -20,12 +18,12 @@ public class GroupHelper extends HelperBase{
 	
 	public List<GroupData> getGroups() {
 		if (cachedGroups==null){
-			rebildCache();
+			cachedGroups = rebildCache();
 		}
 		return cachedGroups;
 	}
 	
-	private void rebildCache() {
+	private List<GroupData> rebildCache() {
 		List<GroupData> cachedGroups = new ArrayList<GroupData>();
 		manager.navigateTo().groupsPage();
 		List<WebElement> checkboxes = driver.findElements(By.name("selected[]"));
@@ -33,7 +31,8 @@ public class GroupHelper extends HelperBase{
 			String title = checkbox.getAttribute("title");
 			String groupname = title.substring("Select (".length(),title.length()-")".length());
 			cachedGroups.add(new GroupData().withGroupname(groupname));
-		}	
+		}
+		return cachedGroups;
 	}
 
 	public GroupHelper createGroup(GroupData group) {
@@ -42,6 +41,7 @@ public class GroupHelper extends HelperBase{
 		fillGroupForm(group);
 		submitGroupCreation();
 		returnToGroupsPage();
+		rebildCache();
 		return this;
 		
 	}	
@@ -52,6 +52,7 @@ public class GroupHelper extends HelperBase{
 		fillGroupForm(group);
 		submitGroupModification();
 		returnToGroupsPage();
+		rebildCache();
 		return this;
 	}
 
@@ -60,6 +61,7 @@ public class GroupHelper extends HelperBase{
 		selectGroupByIndex(index);
 		submitGroupDeletion();
 		returnToGroupsPage();
+		rebildCache();
 		return this;
 	}
 
@@ -87,16 +89,19 @@ public class GroupHelper extends HelperBase{
 
 	public GroupHelper submitGroupCreation() {
 		click(By.name("submit"));
+		cachedGroups=null;
 		return this;
 	}
 	
 	public GroupHelper submitGroupModification() {
 		click(By.name("update"));
+		cachedGroups=null;
 		return this;
 	}
 	
 	private GroupHelper submitGroupDeletion() {
 		click(By.name("delete"));
+		cachedGroups=null;
 		return this;
 	}
 	

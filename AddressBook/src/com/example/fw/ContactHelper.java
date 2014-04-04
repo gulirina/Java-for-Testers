@@ -1,17 +1,12 @@
 package com.example.fw;
 
-import static com.example.fw.ContactHelper.MODIFICATION;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.example.tests.Base;
 import com.example.tests.ContactData;
-import com.example.tests.GroupData;
 
 public class ContactHelper extends HelperBase {
 	
@@ -21,25 +16,35 @@ public static boolean MODIFICATION = false;
 	public ContactHelper(ApplicationManager manager) {
 		super(manager);
 	}
+	
+	private List<ContactData> cachedContacts;
+	
+	public List<ContactData> getContacts() {
+		if (cachedContacts==null){
+			cachedContacts = rebildCache();
+		}
+		return cachedContacts;
+	}
 
-	public List<ContactData> getContacts(){
-		List<ContactData> contacts = new ArrayList<ContactData>();
+	private List<ContactData> rebildCache() {
+		List<ContactData> cachedContacts = new ArrayList<ContactData>();
 		manager.navigateTo().mainPage();
 		List<WebElement> lines = driver.findElements(By.xpath("//tr[@name='entry']//td[2]"));
 		for (WebElement line : lines) {
 			String name = line.getText();
 			String secondName = name;
-			contacts.add(new ContactData().withSecondName(secondName));
+			cachedContacts.add(new ContactData().withSecondName(secondName));
 		}
-		return contacts;
-		
-	}	
+		return cachedContacts;
+	}
+	
 	
 	public ContactHelper createContact(ContactData contact) {
 		initNewContactCreation();
 		fillContactForm(contact, CREATION);
 	    submitNewContactCreation();
 	    goToHomePage();
+	    rebildCache();
 	    return this;
 	}
 	
@@ -49,6 +54,7 @@ public static boolean MODIFICATION = false;
 		fillContactForm(contact, MODIFICATION);
 		submitContactModification();
 		goToHomePage();
+		rebildCache();
 		return this;
 		
 	}
@@ -60,6 +66,7 @@ public static boolean MODIFICATION = false;
 		fillContactForm(contact, MODIFICATION);
 		submitContactModification();	
 		goToHomePage();
+		rebildCache();
 		return this;
 	}
 	
@@ -68,6 +75,7 @@ public static boolean MODIFICATION = false;
 		editContactDetails(index);
 		submitContactDeletion();
 		goToHomePage();
+		rebildCache();
 		return this;
 	}
 	
@@ -77,6 +85,7 @@ public static boolean MODIFICATION = false;
 		initContactModification();
 		submitContactDeletion();
 		goToHomePage();
+		rebildCache();
 		return this;
 	}
 	
@@ -119,13 +128,21 @@ public static boolean MODIFICATION = false;
 	
 	public ContactHelper submitNewContactCreation() {
 		click(By.name("submit"));
+		cachedContacts = null;
 		return this;
 	}
 	
 	public ContactHelper submitContactModification() {
 		click(By.xpath("//input[@value='Update']"));
+		cachedContacts = null;
 		return this;
 	}
+	
+	public ContactHelper submitContactDeletion() {
+		click(By.xpath("//input[@value='Delete']"));
+		cachedContacts = null;
+		return this;
+	} 
 	
 	public ContactHelper showContactDetalis(int index) {
 		int cur_row = index+1; //because the first row is the header of the table
@@ -139,10 +156,6 @@ public static boolean MODIFICATION = false;
 		return this;
 	}
 
-	public ContactHelper submitContactDeletion() {
-		click(By.xpath("//input[@value='Delete']"));
-		return this;
-	} 
 	
 	public ContactHelper goToHomePage() {
 		click(By.linkText("home page"));

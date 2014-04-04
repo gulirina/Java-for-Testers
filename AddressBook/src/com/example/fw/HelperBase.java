@@ -69,7 +69,5 @@ public abstract class HelperBase {
 	    finally {
 	    acceptNextAlert = true;
 	    }
-	  }
-
-	
+	  }	
 }
