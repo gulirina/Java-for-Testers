@@ -1,18 +1,16 @@
 package com.example.tests;
 
 import static org.testng.Assert.assertEquals;
-
 import java.util.Collections;
-import java.util.List;
-
 import org.testng.annotations.Test;
+import com.example.utils.SortedListOf;
 
 public class GroupRemovalTests extends Base {
 	
 	@Test
 	public void deleteSomeGroup() {
 		//check existence
-		 List<GroupData> oldList = app.getGroupHelper().getGroups();
+		SortedListOf<GroupData> oldList = app.getGroupHelper().getGroups();
 		 if(oldList.size()==0){
 			GroupData group = new GroupData();
 			app.getGroupHelper().createGroup(group);
@@ -26,7 +24,7 @@ public class GroupRemovalTests extends Base {
 		//actions
 		app.getGroupHelper().deleteGroup(index);			
 		//save new
-		List<GroupData> newList = app.getGroupHelper().getGroups();
+		SortedListOf<GroupData> newList = app.getGroupHelper().getGroups();
 		//compare states
 		oldList.remove(index);
 		Collections.sort(oldList);

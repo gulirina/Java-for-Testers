@@ -6,13 +6,15 @@ import java.util.Collections;
 import java.util.List;
 import org.testng.annotations.Test;
 
+import com.example.utils.SortedListOf;
+
 public class AllContactsRemovalTests extends Base {
 	
 	@Test
 	public void removeAllContacts(){
 		app.navigateTo().mainPage();
 		//check existance
-		List<ContactData> oldList = app.getContactHelper().getContacts();
+		SortedListOf<ContactData> oldList = app.getContactHelper().getContacts();
 		if(oldList.size()==0){
 			//...		
 		}
@@ -24,7 +26,7 @@ public class AllContactsRemovalTests extends Base {
 				//action
 				app.getContactHelper().deleteContact(index);
 				//save new
-				List<ContactData> newList = app.getContactHelper().getContacts();
+				SortedListOf<ContactData> newList = app.getContactHelper().getContacts();
 				//compare states
 				oldList.remove(index-1);
 				Collections.sort(oldList);

@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import org.testng.annotations.Test;
 
+import com.example.utils.SortedListOf;
+
 public class ContactRemovalTests extends Base {
 	
 	@Test
@@ -13,7 +15,7 @@ public class ContactRemovalTests extends Base {
 		app.navigateTo().mainPage();
 		
 		//check existance
-		List<ContactData> oldList = app.getContactHelper().getContacts();
+		SortedListOf<ContactData> oldList = app.getContactHelper().getContacts();
 		if(oldList.size()==0){
 			ContactData contact = new ContactData();
 			app.getContactHelper().createContact(contact);			
@@ -22,13 +24,13 @@ public class ContactRemovalTests extends Base {
 			//...
 		}
 		//save old
-		oldList = app.getContactHelper().getContacts();
+		oldList= app.getContactHelper().getContacts();
 		int index = 1 + app.getCommonHelper().chooseRandom(oldList);
 		//action
 		app.getContactHelper().deleteContact(index);
 		
 		//save new
-		List<ContactData> newList = app.getContactHelper().getContacts();
+		SortedListOf<ContactData> newList = app.getContactHelper().getContacts();
 		//compare states
 		oldList.remove(index-1);
 		Collections.sort(oldList);

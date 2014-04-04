@@ -7,13 +7,15 @@ import java.util.List;
 
 import org.testng.annotations.Test;
 
+import com.example.utils.SortedListOf;
+
 public class ContactModificationTests extends Base {
 	
 
 	@Test(dataProvider = "randomValidContactGenerator")
 	public void modifySomeContact(ContactData contact){
 		//check existance
-		List<ContactData> oldList = app.getContactHelper().getContacts();
+		SortedListOf<ContactData> oldList = app.getContactHelper().getContacts();
 		if(oldList.size()==0){
 			app.getContactHelper().createContact(contact);			
 		 }
@@ -26,7 +28,7 @@ public class ContactModificationTests extends Base {
 		//action
 		app.getContactHelper().modifyContact(index,contact);	
 		//save new state
-	    List<ContactData> newList = app.getContactHelper().getContacts();
+		SortedListOf<ContactData> newList = app.getContactHelper().getContacts();
 	    //compare states
 	    oldList.remove(index-1);
 	    oldList.add(contact);

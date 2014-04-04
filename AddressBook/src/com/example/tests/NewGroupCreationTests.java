@@ -1,21 +1,20 @@
 package com.example.tests;
 
-import java.util.Collections;
-import java.util.List;
 import static org.testng.Assert.assertEquals;
-
+import java.util.Collections;
 import org.testng.annotations.Test;
+import com.example.utils.SortedListOf;
 
 public class NewGroupCreationTests extends Base{
   
 	@Test(dataProvider = "randomValidGroupGenerator")
 	public void testGroupCreationWithValidData(GroupData group) throws Exception {
 	    //save old
-	    List<GroupData> oldList = app.getGroupHelper().getGroups();
+		SortedListOf<GroupData> oldList = app.getGroupHelper().getGroups();
 	    //actions
 	    app.getGroupHelper().createGroup(group);
 	    //save new
-	    List<GroupData> newList = app.getGroupHelper().getGroups();
+	    SortedListOf<GroupData> newList = app.getGroupHelper().getGroups();
 	    //compare states
 	    oldList.add(group);
 	    Collections.sort(oldList);
