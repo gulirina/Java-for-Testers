@@ -32,6 +32,15 @@ public class GroupHelper extends HelperBase{
 		}
 		return cachedGroups;
 	}
+	
+	public void checkExistance() {
+		SortedListOf<GroupData> list =  getGroups();
+		 if(list.size()==0){
+			GroupData group = new GroupData();
+			createGroup(group);
+		 }	
+	}
+
 
 	public GroupHelper createGroup(GroupData group) {
 		manager.navigateTo().groupsPage();
@@ -73,12 +82,14 @@ public class GroupHelper extends HelperBase{
 	}
 
 	public GroupHelper initNewGroupCreation() {
+		manager.navigateTo().groupsPage();
 		click(By.xpath("//input[@name='new']"));
 		return this;
 		
 	}
 	
 	public GroupHelper initGroupModification(int index) {
+		manager.navigateTo().groupsPage();
 		selectGroupByIndex(index);
 		click(By.name("edit"));
 		return this;
@@ -112,6 +123,7 @@ public class GroupHelper extends HelperBase{
 	private void selectGroupByIndex(int index) {
 		click(By.xpath("//input[@name='selected[]'][" + (index+1) + "]"));
 	}
+
 
 
 

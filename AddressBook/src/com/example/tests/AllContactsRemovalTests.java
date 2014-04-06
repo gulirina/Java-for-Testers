@@ -1,18 +1,14 @@
 package com.example.tests;
 
-import static org.testng.Assert.assertEquals;
-
-import java.util.Collections;
-import java.util.List;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertThat;
 import org.testng.annotations.Test;
-
 import com.example.utils.SortedListOf;
 
 public class AllContactsRemovalTests extends Base {
 	
 	@Test
 	public void removeAllContacts(){
-		app.navigateTo().mainPage();
 		//check existance
 		SortedListOf<ContactData> oldList = app.getContactHelper().getContacts();
 		if(oldList.size()==0){
@@ -28,9 +24,7 @@ public class AllContactsRemovalTests extends Base {
 				//save new
 				SortedListOf<ContactData> newList = app.getContactHelper().getContacts();
 				//compare states
-				oldList.remove(index-1);
-				Collections.sort(oldList);
-			    assertEquals(newList, oldList);
+				assertThat(newList, equalTo(oldList.without(index-1)));
 			} while(oldList.size()!=0);
 		}
 	}

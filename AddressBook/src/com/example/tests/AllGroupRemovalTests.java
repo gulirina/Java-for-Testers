@@ -1,8 +1,9 @@
 package com.example.tests;
 
-import static org.testng.Assert.assertEquals;
-import java.util.Collections;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertThat;
 import org.testng.annotations.Test;
+
 import com.example.utils.SortedListOf;
 
 public class AllGroupRemovalTests extends Base{
@@ -24,10 +25,8 @@ public class AllGroupRemovalTests extends Base{
 				//save new
 				SortedListOf<GroupData> newList = app.getGroupHelper().getGroups();
 				//compare states
-				oldList.remove(index);
-				Collections.sort(oldList);
-				assertEquals(newList, oldList);		
-			} while(oldList.size()!=0);
+				assertThat(newList, equalTo(oldList.without(index)));	
+			} while(oldList.size()>0);
 		}		
 	}
 }

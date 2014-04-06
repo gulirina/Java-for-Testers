@@ -39,6 +39,14 @@ public static boolean MODIFICATION = false;
 		return cachedContacts;
 	}
 	
+	public void checkExistance() {
+		SortedListOf<ContactData> list = getContacts();
+		if(list.size()==0){
+			ContactData contact = new ContactData();
+			createContact(contact);			
+		 }	
+	}
+
 	
 	public ContactHelper createContact(ContactData contact) {
 		initNewContactCreation();
@@ -167,6 +175,7 @@ public static boolean MODIFICATION = false;
 		click(By.linkText("add next"));
 		return this;
 	}
+
 
 
 
