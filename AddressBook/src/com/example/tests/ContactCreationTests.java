@@ -10,7 +10,7 @@ public class ContactCreationTests extends Base {
 	public void testNewContactCreation(ContactData contact) throws Exception {
 	    //save old
 		SortedListOf<ContactData> oldList = app.getContactHelper().getContacts();
-	    //action   
+	    //action  
 	    app.getContactHelper().createContact(contact);
 	    //save new state
 	    SortedListOf<ContactData> newList = app.getContactHelper().getContacts();

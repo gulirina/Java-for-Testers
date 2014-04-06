@@ -30,11 +30,12 @@ public static boolean MODIFICATION = false;
 	private SortedListOf<ContactData> rebildCache() {
 		cachedContacts = new SortedListOf<ContactData>();
 		manager.navigateTo().mainPage();
-		List<WebElement> lines = driver.findElements(By.xpath("//tr[@name='entry']//td[2]"));
+		List<WebElement> lines = driver.findElements(By.xpath("//tr[@name='entry']"));
 		for (WebElement line : lines) {
-			String name = line.getText();
-			String secondName = name;
-			cachedContacts.add(new ContactData().withSecondName(secondName));
+			WebElement cell1 = line.findElement(By.xpath(".//td[2]"));
+			WebElement cell2 = line.findElement(By.xpath(".//td[3]"));
+			String fullName = ""+cell1.getText()+" "+cell2.getText()+"";			
+			cachedContacts.add(new ContactData().saveFullName(fullName));			
 		}
 		return cachedContacts;
 	}
@@ -98,6 +99,22 @@ public static boolean MODIFICATION = false;
 		return this;
 	}
 	
+	public int getPhoneList() {
+		SortedListOf<ContactData> userPhones = new SortedListOf<ContactData>();
+		manager.navigateTo().phonePage();
+		List<WebElement> cells = driver.findElements(By.xpath("//tr//td"));
+		int emptyCells = 0;
+		for(WebElement cell:cells){
+			String data = cell.getText();
+			if(data.equals("-")){
+				emptyCells++;
+			}
+		}
+		int size = cells.size()-emptyCells; 
+		
+		return size;
+	}
+	
 //================================================================================	
 	
 	public ContactHelper fillContactForm(ContactData contact,boolean formType) {
@@ -122,6 +139,7 @@ public static boolean MODIFICATION = false;
 	    }
 	    type(By.name("address2"), contact.getSupAddress());
 	    type(By.name("phone2"), contact.getSupPhone());
+	    contact.saveFullName(""+contact.getSecondName()+" "+contact.getFirstName()+"");
 	    return this;
 	}
 	

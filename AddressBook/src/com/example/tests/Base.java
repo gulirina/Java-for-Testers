@@ -28,7 +28,7 @@ public class Base {
 	@DataProvider
 	public Iterator<Object[]>randomValidGroupGenerator() {
 	  List<Object[]> list = new ArrayList<Object[]>();
-	  for(int i=0;i<5;i++) {
+	  for(int i=0;i<1;i++) {
 		  GroupData group = new GroupData()
 		  	.withGroupname(generateRandomString())
 		  	.withHeader(generateRandomString())
@@ -58,21 +58,23 @@ public class Base {
 		  	.withBYear("1970")
 		  	//.withGroupName(generateRandomString())
 		  	.withSupAddress(generateRandomString())
-		  	.withSupPhone(generateRandomString());		  
-		  list.add(new Object[]{contact});
+		  	.withSupPhone(generateRandomString());
+		  list.add(new Object[]{contact});	  
 	  }
 	  //..
 	  return list.iterator();
 	  
   }	
 	  
-  public String generateRandomString() {
+
+
+public String generateRandomString() {
 	  Random rnd = new Random();
 	  if(rnd.nextInt(3)==0) {
 		  return "";
 	  }
 	  else {
-		  return "test"+rnd.nextInt();
+		  return "test"+rnd.nextInt(2);
 	  }
   }	 
   
