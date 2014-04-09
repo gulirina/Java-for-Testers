@@ -19,6 +19,7 @@ public class GroupCreationTests extends Base{
 	public Iterator<Object[]> groupsFromFile() throws IOException {
 		return wrapGroupForDataProvider(loadGroupsFromXmlFile(new File("groups.xml"))).iterator();
 	}
+	
   
 	@Test(dataProvider = "groupsFromFile")
 	public void testGroupCreationWithValidData(GroupData group) throws Exception {

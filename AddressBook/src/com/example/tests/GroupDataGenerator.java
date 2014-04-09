@@ -11,7 +11,7 @@ import java.util.Random;
 
 import com.thoughtworks.xstream.XStream;
 
-public class GroupDataGenerator {
+public class GroupDataGenerator extends BaseGenerator{
 	
 	public static void main(String[] args) throws IOException {
 		if(args.length<3){
@@ -46,16 +46,8 @@ public class GroupDataGenerator {
 		  }
 		  return list;	
 	}
-
-	public static String generateRandomString() {
-		Random rnd = new Random();
-		if(rnd.nextInt(3)==0) {
-			return "";
-		}
-		else {
-			return "test"+rnd.nextInt(2);
-		}
-	}	 
+	
+	//====================================================================================
 	
 	private static void saveGroupToXmlFile(List<GroupData> groups, File file) throws IOException {
 		XStream xstream = new XStream();
@@ -73,7 +65,7 @@ public class GroupDataGenerator {
 	}
 	
 	
-	
+	//======================================================================================
 	
 
 	private static void saveGroupToCsvFile(List<GroupData> groups, File file) throws IOException {

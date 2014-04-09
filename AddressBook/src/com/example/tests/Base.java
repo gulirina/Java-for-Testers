@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 
 import static com.example.tests.GroupDataGenerator.generateRandomGroups;
+import static com.example.tests.ContactDataGenerator.generateRandomContact;
 import com.example.fw.ApplicationManager;
 
 public class Base {
@@ -26,6 +27,7 @@ public class Base {
 	public void tearDown() throws Exception {
 		app.stop();
 	}
+	//========================================================================
 	
 	@DataProvider
 	public Iterator<Object[]>randomValidGroupGenerator()  {
@@ -39,50 +41,23 @@ public class Base {
 		}
 		return list;
 	}
+	
+	//=========================================================================
 
 	@DataProvider
 	public Iterator<Object[]> randomValidContactGenerator() {
-	  List<Object[]> list = new ArrayList<Object[]>();
-	  Random rnd = new Random();
-	  for(int i=0;i<5;i++){
-		  ContactData contact = new ContactData()
-		  	.withFirstName(generateRandomString())
-		  	.withSecondName(generateRandomString())
-		  	.withMainAddress(generateRandomString())
-		  	.withHPhone(generateRandomString())
-		  	.withMPhone(generateRandomString())
-		  	.withWPhone(generateRandomString())
-		  	.withEmail1(generateRandomString())
-		  	.withEmail2(generateRandomString())
-		  	.withBDay("1")
-		  	.withBMonth("August")
-		  	.withBYear("1970")
-		  	//.withGroupName(generateRandomString())
-		  	.withSupAddress(generateRandomString())
-		  	.withSupPhone(generateRandomString());
-		  list.add(new Object[]{contact});	  
-	  }
-	  //..
-	  return list.iterator();
-	  
-  }	
-	  
-
-
-public String generateRandomString() {
-	  Random rnd = new Random();
-	  if(rnd.nextInt(3)==0) {
-		  return "";
-	  }
-	  else {
-		  return "test"+rnd.nextInt(2);
-	  }
-  }	 
+		return wrapContactForDataProvider(generateRandomContact(5)).iterator();  
+	}	 	 
   
-  public String generateRandomNumber(int limit){
-	  Random rnd = new Random();
-	  int number = 1+rnd.nextInt(limit);
-	  String num = ""+number+"";
-	  return num;
-  }  	
+	private List<Object[]> wrapContactForDataProvider(List<ContactData> contacts) {
+		List<Object[]> list = new ArrayList<Object[]>();
+		for(ContactData contact : contacts){
+			list.add(new Object[] {contact});
+		}
+		return list;
+	}
+  
+  //=============================================================================
+
+ 	
 }
