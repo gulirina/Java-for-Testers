@@ -49,7 +49,7 @@ public class Base {
 		return wrapContactForDataProvider(generateRandomContact(5)).iterator();  
 	}	 	 
   
-	private List<Object[]> wrapContactForDataProvider(List<ContactData> contacts) {
+	public static List<Object[]> wrapContactForDataProvider(List<ContactData> contacts) {
 		List<Object[]> list = new ArrayList<Object[]>();
 		for(ContactData contact : contacts){
 			list.add(new Object[] {contact});

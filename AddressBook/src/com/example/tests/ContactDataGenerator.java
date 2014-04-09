@@ -1,6 +1,8 @@
 package com.example.tests;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -68,6 +70,12 @@ public class ContactDataGenerator extends BaseGenerator {
 		writer.close();
 	}
 	
+	public static List<ContactData> loadContactsFromXmlFile(File file) throws IOException {
+		XStream xstream = new XStream();
+		xstream.alias("contact", ContactData.class);
+		return (List<ContactData>) xstream.fromXML(file);
+	}
+
 	//======================================================================================
 
 	private static void saveContactToCsvFile(List<ContactData> contacts, File file) throws IOException {
@@ -84,10 +92,40 @@ public class ContactDataGenerator extends BaseGenerator {
 						contact.getBDay()+","+
 						contact.getBMonth()+","+
 						contact.getBYear()+","+
+						contact.getGroupName()+","+
 						contact.getSupAddress()+","+
 						contact.getSupPhone()+","+
 						",!"+"\n");
 		}
 		writer.close();		
+	}
+	
+	public static List<ContactData> loadContactsFromCsvFile(File file) throws IOException{
+		List<ContactData> list = new ArrayList<ContactData>();
+		FileReader reader = new FileReader(file);
+		BufferedReader bufferedReader = new BufferedReader(reader);
+		String line = bufferedReader.readLine();
+		while (line!=null) {
+			String[] part = line.split(",");
+			ContactData contact = new ContactData()
+				.withFirstName(part[0])
+				.withSecondName(part[1])
+				.withMainAddress(part[2])
+				.withHPhone(part[3])
+				.withMPhone(part[4])
+				.withWPhone(part[5])
+				.withEmail1(part[6])
+				.withEmail2(part[7])
+				.withBDay(part[8])
+				.withBMonth(part[9])
+				.withBYear(part[10])
+				.withGroupName(part[11])
+				.withSupAddress(part[12])
+				.withSupPhone(part[13]);
+			list.add(contact);
+			line = bufferedReader.readLine();
+		}
+		bufferedReader.close();
+		return list;		
 	}
 }
