@@ -1,5 +1,6 @@
 package com.example.tests;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -9,6 +10,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 
+import static com.example.tests.GroupDataGenerator.generateRandomGroups;
 import com.example.fw.ApplicationManager;
 
 public class Base {
@@ -26,18 +28,17 @@ public class Base {
 	}
 	
 	@DataProvider
-	public Iterator<Object[]>randomValidGroupGenerator() {
-	  List<Object[]> list = new ArrayList<Object[]>();
-	  for(int i=0;i<1;i++) {
-		  GroupData group = new GroupData()
-		  	.withGroupname(generateRandomString())
-		  	.withHeader(generateRandomString())
-		  	.withFooter(generateRandomString());
-		  list.add(new Object[]{group});
-	  }
-	  return list.iterator();
-  }
+	public Iterator<Object[]>randomValidGroupGenerator()  {
+		return wrapGroupForDataProvider(generateRandomGroups(5)).iterator();
+	}
 	
+	public static List<Object[]> wrapGroupForDataProvider(List<GroupData> groups) {
+		List<Object[]> list = new ArrayList<Object[]>();
+		for(GroupData group : groups){
+			list.add(new Object[] {group});
+		}
+		return list;
+	}
 
 	@DataProvider
 	public Iterator<Object[]> randomValidContactGenerator() {
