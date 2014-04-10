@@ -38,7 +38,7 @@ public class ContactDataGenerator extends BaseGenerator {
 	public static List<ContactData> generateRandomContact(int amount) {
 		  List<ContactData> list = new ArrayList<ContactData>();
 		  Random rnd = new Random();
-		  for(int i=0;i<5;i++){
+		  for(int i=0;i<amount;i++){
 			  ContactData contact = new ContactData()
 			  	.withFirstName(generateRandomString())
 			  	.withSecondName(generateRandomString())
@@ -94,7 +94,7 @@ public class ContactDataGenerator extends BaseGenerator {
 						contact.getBYear()+","+
 						contact.getGroupName()+","+
 						contact.getSupAddress()+","+
-						contact.getSupPhone()+","+
+						contact.getSupPhone()+
 						",!"+"\n");
 		}
 		writer.close();		

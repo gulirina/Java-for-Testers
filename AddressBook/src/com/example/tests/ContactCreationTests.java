@@ -19,8 +19,8 @@ public class ContactCreationTests extends Base {
 
 	@DataProvider
 	public Iterator<Object[]> contactsFromFile() throws IOException {
-		return wrapContactForDataProvider(loadContactsFromXmlFile(new File("contacts.xml"))).iterator();
-		//return wrapContactForDataProvider(loadContactsFromCsvFile(new File("contacts.txt"))).iterator();
+		//return wrapContactForDataProvider(loadContactsFromXmlFile(new File("contacts.xml"))).iterator();
+		return wrapContactForDataProvider(loadContactsFromCsvFile(new File("contacts.txt"))).iterator();
 	}
 	
 	@Test(dataProvider = "contactsFromFile")
