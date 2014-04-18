@@ -1,44 +1,42 @@
 package com.example.fw;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
-
 import org.netbeans.jemmy.ClassReference;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-
+import org.netbeans.jemmy.operators.JFrameOperator;
 
 public class ApplicationManager {
 	
-	public  WebDriver driver;
-	public  String baseUrl;
-	private Properties properties;
+	private static ApplicationManager singleton;
+
+	private Properties props;
 	private FolderHelper folderHelper;
+	private JFrameOperator mainFrame;
+
+	private MenuHelper menuHelper;
 	
-	
-	public ApplicationManager(Properties properties) {
-		this.properties = properties;
-		String browser = properties.getProperty("browser");
-		if("firefox".equals(browser)){
-			driver = new FirefoxDriver();
-		} else if ("chrome".equals(browser)){
-			driver = new ChromeDriver();
-		} else{
-			throw new Error("Unsupported browser: "+browser);
+	public static ApplicationManager getInstance() {
+		if (singleton == null) {
+			singleton = new ApplicationManager();
 		}
-		
-	    baseUrl = properties.getProperty("baseUrl");
-	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-	    driver.get(baseUrl);
+		return singleton;
 	}
 	
 	public void stop() {
-		driver.quit();	   	
+		getApplication().requestClose();
 	}
-
+	
+	public void setProperties(Properties props) {
+		this.props = props;
+	}
+ 
+	public String getProperty(String key) {
+		return props.getProperty(key);
+	}
+	
+	public String getProperty(String key, String defaultValue) {
+		return props.getProperty(key, defaultValue);
+	}
+	
 	public FolderHelper getFolderHelper() {
 		if(folderHelper == null){
 			folderHelper = new FolderHelper(this);
@@ -46,19 +44,22 @@ public class ApplicationManager {
 		return folderHelper;
 	}
 
-	public void getApplication() {
-		try {
-			new ClassReference("addressbook.AddressBookFrame").startApplication();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public JFrameOperator getApplication() {
+		if(mainFrame == null){
+			try {
+				new ClassReference("addressbook.AddressBookFrame").startApplication();
+				mainFrame = new JFrameOperator("jAddressBook");
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+		} 
+		return mainFrame;		
 	}
-	
+
+	public MenuHelper getMenuHelper() {
+		if(menuHelper == null){
+			menuHelper = new MenuHelper(this);
+		}
+		return menuHelper;
+	}
 }
