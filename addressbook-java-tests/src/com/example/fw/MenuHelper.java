@@ -4,7 +4,7 @@ import javax.swing.JMenuBar;
 
 import org.netbeans.jemmy.operators.JMenuBarOperator;
 
-public class MenuHelper {
+public class MenuHelper extends HelperBase{
 
 	private ApplicationManager manager;
 
