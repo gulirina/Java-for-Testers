@@ -10,11 +10,10 @@ public class TestContactCreation extends Base {
 	@Test
 	public void shouldCreateContactWithvalidData(){
 		Contact contact = new Contact()
-							.setFirstname("tester")
-							.setLastName("tester");
+							.setFirstname("irene")
+							.setLastName("guliaeva");
 		app.getContactHelper().createContact(contact);
 		Contact createdContact = app.getContactHelper().getFirstContact();
 		Assert.assertEquals(contact, createdContact);
 	}
-
 }

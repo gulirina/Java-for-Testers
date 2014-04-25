@@ -34,6 +34,13 @@ public class ContactHelper extends HelperBase{
 			.click("Save")
 			.winWaitAndActivate("AddressBook Portable", "", 5000);
 	}
+	
+	public void closeApp(){
+		manager.getAutoItHelper()
+			.winWaitAndActivate("AddressBook Portable", "", 5000)
+			.click("TListView1")
+			.send("{Alt}"+"{F4}");
+	}
 
 	public Contact getFirstContact() {
 		manager.getAutoItHelper()
