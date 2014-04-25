@@ -35,18 +35,10 @@ public class ContactHelper extends HelperBase{
 			.winWaitAndActivate("AddressBook Portable", "", 5000);
 	}
 	
-	public void closeApp(){
-		manager.getAutoItHelper()
-			.winWaitAndActivate("AddressBook Portable", "", 5000)
-			.click("TListView1")
-			.send("{Alt}"+"{F4}");
-	}
 
 	public Contact getFirstContact() {
+		selectFirstContact();
 		manager.getAutoItHelper()
-			.winWaitAndActivate("AddressBook Portable", "", 5000)
-			.click("TListView1")
-			.send("{DOWN}{SPACE}")
 			.click("Edit")
 			.winWaitAndActivate("Update Contact", "", 5000);
 		Contact contact = new Contact()
@@ -54,5 +46,35 @@ public class ContactHelper extends HelperBase{
 			.setLastName(manager.getAutoItHelper().getText("TDBEdit11"));
 		manager.getAutoItHelper().click("Cancel");
 		return contact;
+	}
+	
+	public void selectFirstContact(){
+		manager.getAutoItHelper()
+		.winWaitAndActivate("AddressBook Portable", "", 5000)
+		.click("TListView1")
+		.send("{DOWN}{SPACE}");		
+	}
+
+	public void deleteFirstContact() {
+		selectFirstContact();
+		manager.getAutoItHelper()
+			.click("Delete")
+			.winWaitAndActivate("Confirm", "", 5000)
+			.click("TButton2")
+			.winWaitAndActivate("AddressBook Portable", "", 5000);
+			
+	}
+
+	public boolean checkExistance() {
+		selectFirstContact();
+		manager.getAutoItHelper()
+			.click("Edit");
+		if(manager.getAutoItHelper().winWaitAndActivate("Information", "", 5000) != null){
+			manager.getAutoItHelper()
+			.click("TButton1");
+			return true;
+		} else {
+			return false;
+		}		
 	}
 }
