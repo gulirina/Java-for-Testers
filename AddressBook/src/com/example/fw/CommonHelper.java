@@ -3,7 +3,7 @@ package com.example.fw;
 import java.util.List;
 import java.util.Random;
 
-public class CommonHelper extends HelperBase {
+public class CommonHelper extends WebDriverHelperBase {
 
 	public CommonHelper(ApplicationManager manager) {
 		super(manager);
