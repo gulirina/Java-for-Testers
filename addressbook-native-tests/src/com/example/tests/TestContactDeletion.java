@@ -13,7 +13,7 @@ public class TestContactDeletion extends Base{
 				.setFirstname("irene")
 				.setLastName("guliaeva");
 			app.getContactHelper().createContact(contact);
-		}		
+		}			
 		app.getContactHelper().deleteFirstContact();
 	}
 

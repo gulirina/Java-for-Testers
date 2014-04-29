@@ -69,12 +69,17 @@ public class ContactHelper extends HelperBase{
 		selectFirstContact();
 		manager.getAutoItHelper()
 			.click("Edit");
-		if(manager.getAutoItHelper().winWaitAndActivate("Information", "", 5000) != null){
+		if(manager.getAutoItHelper().winExists("Information")){
 			manager.getAutoItHelper()
+			.winWaitAndActivate("Information", "", 5000)
 			.click("TButton1");
-			return true;
-		} else {
 			return false;
+		} else {
+			manager.getAutoItHelper()
+			.winWaitAndActivate("Update Contact", "", 5000)
+			.click("Cancel")
+			.winWaitAndActivate("AddressBook Portable", "", 5000);
+			return true;
 		}		
 	}
 }
