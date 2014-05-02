@@ -84,14 +84,14 @@ public class ContactDataGenerator extends BaseGenerator {
 			writer.write(contact.getFirstName()+","+
 						contact.getSecondName()+","+
 						contact.getMainAddress()+","+
-						contact.getHPhone()+","+
-						contact.getMPhone()+","+
-						contact.getWPhone()+","+
+						contact.gethPhone()+","+
+						contact.getmPhone()+","+
+						contact.getwPhone()+","+
 						contact.getEmail1()+","+
 						contact.getEmail2()+","+
-						contact.getBDay()+","+
-						contact.getBMonth()+","+
-						contact.getBYear()+","+
+						contact.getbDay()+","+
+						contact.getbMonth()+","+
+						contact.getbYear()+","+
 						contact.getGroupName()+","+
 						contact.getSupAddress()+","+
 						contact.getSupPhone()+

@@ -26,12 +26,12 @@ public class ContactCreationTests extends Base {
 	@Test(dataProvider = "contactsFromFile")
 	public void testNewContactCreation(ContactData contact) throws Exception {
 	    //save old
-		SortedListOf<ContactData> oldList = app.getContactHelper().getContacts();
+		SortedListOf<ContactData> oldList = app.getModel().getContacts();
 	    //action  
 	    app.getContactHelper().createContact(contact);
 	    //save new state
-	    SortedListOf<ContactData> newList = app.getContactHelper().getContacts();
+	    SortedListOf<ContactData> newList = app.getModel().getContacts();
 	    //compare states
-	    assertThat(newList, equalTo(oldList.withAdded(contact)));
+	    assertThat(newList, equalTo(oldList)); //.withAdded(contact)
 	}
 }

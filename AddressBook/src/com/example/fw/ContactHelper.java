@@ -121,14 +121,14 @@ public static boolean MODIFICATION = false;
 		type(By.name("firstname"), contact.getFirstName());
 		type(By.name("lastname"), contact.getSecondName());
 	    type(By.name("address"), contact.getMainAddress());
-	    type(By.name("home"), contact.getHPhone());
-	    type(By.name("mobile"), contact.getMPhone());
-	    type(By.name("work"), contact.getWPhone());
+	    type(By.name("home"), contact.gethPhone());
+	    type(By.name("mobile"), contact.getmPhone());
+	    type(By.name("work"), contact.getwPhone());
 	    type(By.name("email"), contact.getEmail1());
 	    type(By.name("email2"),contact.getEmail2());
-	    selectByText(By.name("bday"), contact.getBDay());
-	    selectByText(By.name("bmonth"), contact.getBMonth());
-	    type(By.name("byear"), contact.getBYear());
+	    selectByText(By.name("bday"), contact.getbDay());
+	    selectByText(By.name("bmonth"), contact.getbMonth());
+	    type(By.name("byear"), contact.getbYear());
 	    if(formType == CREATION){
 	    	//selectByText(By.name("new_group"), contact.getGroupName());
 	    }

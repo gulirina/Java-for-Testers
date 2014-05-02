@@ -3,6 +3,7 @@ package com.example.tests;
 import com.example.fw.ApplicationManager;
 
 public class ContactData implements Comparable<ContactData> {
+	private String id;
 	private String firstName;
 	private String secondName;
 	private String mainAddress;
@@ -147,13 +148,13 @@ public class ContactData implements Comparable<ContactData> {
 	public String getMainAddress() {
 		return mainAddress;
 	}
-	public String getHPhone() {
+	public String gethPhone() {
 		return hPhone;
 	}
-	public String getMPhone() {
+	public String getmPhone() {
 		return mPhone;
 	}
-	public String getWPhone() {
+	public String getwPhone() {
 		return wPhone;
 	}
 	public String getEmail1() {
@@ -162,13 +163,13 @@ public class ContactData implements Comparable<ContactData> {
 	public String getEmail2() {
 		return email2;
 	}
-	public String getBDay() {
+	public String getbDay() {
 		return bDay;
 	}
-	public String getBMonth() {
+	public String getbMonth() {
 		return bMonth;
 	}
-	public String getBYear() {
+	public String getbYear() {
 		return bYear;
 	}
 	public String getGroupName() {
@@ -179,6 +180,73 @@ public class ContactData implements Comparable<ContactData> {
 	}
 	public String getSupPhone() {
 		return supPhone;
+	}
+	public String getId() {
+		return id;
+	}
+//=======================================================================
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setSecondName(String secondName) {
+		this.secondName = secondName;
+	}
+
+	public void setMainAddress(String mainAddress) {
+		this.mainAddress = mainAddress;
+	}
+
+	public void sethPhone(String hPhone) {
+		this.hPhone = hPhone;
+	}
+
+	public void setmPhone(String mPhone) {
+		this.mPhone = mPhone;
+	}
+
+	public void setwPhone(String wPhone) {
+		this.wPhone = wPhone;
+	}
+
+	public void setEmail1(String email1) {
+		this.email1 = email1;
+	}
+
+	public void setEmail2(String email2) {
+		this.email2 = email2;
+	}
+
+	public void setbDay(String bDay) {
+		this.bDay = bDay;
+	}
+
+	public void setbMonth(String bMonth) {
+		this.bMonth = bMonth;
+	}
+
+	public void setbYear(String bYear) {
+		this.bYear = bYear;
+	}
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
+
+	public void setSupAddress(String supAddress) {
+		this.supAddress = supAddress;
+	}
+
+	public void setSupPhone(String supPhone) {
+		this.supPhone = supPhone;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 
 

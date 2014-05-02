@@ -4,7 +4,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Xstream"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Selenium"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/MySql"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/hiber"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/MySQL"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Hibernate"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -11,13 +11,13 @@ public class GroupRemovalTests extends Base {
 	public void deleteSomeGroup() {
 		app.getGroupHelper().checkExistance();
 		//save old
-		SortedListOf<GroupData> oldList = app.getGroupHelper().getGroups();
+		SortedListOf<GroupData> oldList = app.getModel().getGroups();
 		int index = app.getCommonHelper().chooseRandom(oldList);
 		//actions
 		app.getGroupHelper().deleteGroup(index);			
 		//save new
-		SortedListOf<GroupData> newList = app.getGroupHelper().getGroups();
+		SortedListOf<GroupData> newList = app.getModel().getGroups();
 		//compare states
-		assertThat(newList, equalTo(oldList.without(index)));		
+		assertThat(newList, equalTo(oldList));		//.without(index)
 	}
 }
