@@ -11,6 +11,7 @@ public class ApplicationModel {
 	private SortedListOf<GroupData> groups;
 	private List<GroupData> listGroups;
 	private SortedListOf<ContactData> contacts;
+	private List<GroupData> listContacts;
 	
 	//==========================================================================
 	
@@ -42,7 +43,7 @@ public class ApplicationModel {
 		this.contacts = new SortedListOf<ContactData>(contacts);
 	}
 
-	public ApplicationModel addGroup(ContactData contact) {
+	public ApplicationModel addContact(ContactData contact) {
 		contacts.add(contact);	
 		return this;
 	}

@@ -27,7 +27,7 @@ public class ContactData implements Comparable<ContactData> {
 	
 	@Override
 	public String toString() {
-		return "ContactData [fullName=" + fullName + "]";
+		return "ContactData [fullName=" + getFullName() + "]";
 	}
 
 	@Override
@@ -47,17 +47,17 @@ public class ContactData implements Comparable<ContactData> {
 		if (getClass() != obj.getClass())
 			return false;
 		ContactData other = (ContactData) obj;
-		if (fullName == null) {
-			if (other.fullName != null)
+		if (getFullName() == null) {
+			if (other.getFullName() != null)
 				return false;
-		} else if (!fullName.equals(other.fullName))
+		} else if (!getFullName().equals(other.getFullName()))
 			return false;
 		return true;
 	}
 	
 	@Override
 	public int compareTo(ContactData other) {
-		return this.fullName.toLowerCase().compareTo(other.fullName.toLowerCase());
+		return this.getFullName().toLowerCase().compareTo(other.getFullName().toLowerCase());
 	}
 
 
@@ -183,6 +183,16 @@ public class ContactData implements Comparable<ContactData> {
 	}
 	public String getId() {
 		return id;
+	}
+	
+	public String getFullName() {
+		if(fullName!=null){
+			return fullName;
+		} else{
+			return secondName + " " + firstName;
+		}
+		
+		
 	}
 //=======================================================================
 	public void setId(String id) {

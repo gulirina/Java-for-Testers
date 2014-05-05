@@ -18,30 +18,23 @@ public static boolean MODIFICATION = false;
 		super(manager);
 	}
 	
-	private SortedListOf<ContactData> cachedContacts;
 	
-	public SortedListOf<ContactData> getContacts() {
-		if (cachedContacts==null){
-			cachedContacts = rebildCache();
-		}
-		return cachedContacts;
-	}
-
-	private SortedListOf<ContactData> rebildCache() {
-		cachedContacts = new SortedListOf<ContactData>();
+	public SortedListOf<ContactData> getUiContacts() {
+		SortedListOf<ContactData> contacts = new SortedListOf<ContactData>();
 		manager.navigateTo().mainPage();
 		List<WebElement> lines = driver.findElements(By.xpath("//tr[@name='entry']"));
 		for (WebElement line : lines) {
 			WebElement cell1 = line.findElement(By.xpath(".//td[2]"));
 			WebElement cell2 = line.findElement(By.xpath(".//td[3]"));
 			String fullName = ""+cell1.getText()+" "+cell2.getText()+"";			
-			cachedContacts.add(new ContactData().saveFullName(fullName));			
+			contacts.add(new ContactData().saveFullName(fullName));			
 		}
-		return cachedContacts;
+		return contacts;
 	}
+
 	
 	public void checkExistance() {
-		SortedListOf<ContactData> list = getContacts();
+		SortedListOf<ContactData> list = getUiContacts();
 		if(list.size()==0){
 			ContactData contact = new ContactData();
 			createContact(contact);			
@@ -54,7 +47,7 @@ public static boolean MODIFICATION = false;
 		fillContactForm(contact, CREATION);
 	    submitNewContactCreation();
 	    goToHomePage();
-	    rebildCache();
+	    manager.getModel().addContact(contact);
 	    return this;
 	}
 	
@@ -64,7 +57,7 @@ public static boolean MODIFICATION = false;
 		fillContactForm(contact, MODIFICATION);
 		submitContactModification();
 		goToHomePage();
-		rebildCache();
+		manager.getModel().remouveContact(index).addContact(contact);
 		return this;
 		
 	}
@@ -76,7 +69,7 @@ public static boolean MODIFICATION = false;
 		fillContactForm(contact, MODIFICATION);
 		submitContactModification();	
 		goToHomePage();
-		rebildCache();
+		manager.getModel().remouveContact(index).addContact(contact);
 		return this;
 	}
 	
@@ -85,7 +78,7 @@ public static boolean MODIFICATION = false;
 		editContactDetails(index);
 		submitContactDeletion();
 		goToHomePage();
-		rebildCache();
+		manager.getModel().remouveContact(index);
 		return this;
 	}
 	
@@ -95,7 +88,7 @@ public static boolean MODIFICATION = false;
 		initContactModification();
 		submitContactDeletion();
 		goToHomePage();
-		rebildCache();
+		manager.getModel().remouveContact(index);
 		return this;
 	}
 	
@@ -155,19 +148,16 @@ public static boolean MODIFICATION = false;
 	
 	public ContactHelper submitNewContactCreation() {
 		click(By.name("submit"));
-		cachedContacts = null;
 		return this;
 	}
 	
 	public ContactHelper submitContactModification() {
 		click(By.xpath("//input[@value='Update']"));
-		cachedContacts = null;
 		return this;
 	}
 	
 	public ContactHelper submitContactDeletion() {
 		click(By.xpath("//input[@value='Delete']"));
-		cachedContacts = null;
 		return this;
 	} 
 	
