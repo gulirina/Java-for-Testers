@@ -47,7 +47,6 @@ public static boolean MODIFICATION = false;
 		fillContactForm(contact, CREATION);
 	    submitNewContactCreation();
 	    goToHomePage();
-	    manager.getModel().addContact(contact);
 	    return this;
 	}
 	
@@ -57,7 +56,6 @@ public static boolean MODIFICATION = false;
 		fillContactForm(contact, MODIFICATION);
 		submitContactModification();
 		goToHomePage();
-		manager.getModel().remouveContact(index).addContact(contact);
 		return this;
 		
 	}
@@ -69,7 +67,6 @@ public static boolean MODIFICATION = false;
 		fillContactForm(contact, MODIFICATION);
 		submitContactModification();	
 		goToHomePage();
-		manager.getModel().remouveContact(index).addContact(contact);
 		return this;
 	}
 	
@@ -78,7 +75,6 @@ public static boolean MODIFICATION = false;
 		editContactDetails(index);
 		submitContactDeletion();
 		goToHomePage();
-		manager.getModel().remouveContact(index);
 		return this;
 	}
 	
@@ -88,7 +84,6 @@ public static boolean MODIFICATION = false;
 		initContactModification();
 		submitContactDeletion();
 		goToHomePage();
-		manager.getModel().remouveContact(index);
 		return this;
 	}
 	

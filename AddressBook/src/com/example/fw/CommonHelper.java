@@ -10,8 +10,12 @@ public class CommonHelper extends WebDriverHelperBase {
 	}
 	
 	public static <T> int chooseRandom(List<T> list) {
+		if(list.size()!=0){
 		Random  rnd = new Random();
 	    int index = rnd.nextInt(list.size());
 		return index;
+		} else {
+			return -1;
+		}
 	}
 }

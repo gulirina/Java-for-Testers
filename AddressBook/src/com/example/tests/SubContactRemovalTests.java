@@ -10,11 +10,11 @@ public class SubContactRemovalTests extends Base {
 	@Test
 	public void deleteSomeContact() {
 		app.getContactHelper().checkExistance();
-		SortedListOf<ContactData> oldList = app.getContactHelper().getUiContacts();
+		SortedListOf<ContactData> oldList = new SortedListOf<ContactData>(app.getHibernateHelper().listContacts());
 		int index = 1 + app.getCommonHelper().chooseRandom(oldList);
 		app.getContactHelper().subDeleteContact(index);
 		//save new
-		SortedListOf<ContactData> newList = app.getContactHelper().getUiContacts();
+		SortedListOf<ContactData> newList = new SortedListOf<ContactData>(app.getHibernateHelper().listContacts());
 		//compare states
 		assertThat(newList, equalTo(oldList.without(index-1)));
 	}

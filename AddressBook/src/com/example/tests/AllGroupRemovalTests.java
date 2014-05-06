@@ -11,21 +11,21 @@ public class AllGroupRemovalTests extends Base{
 	@Test
 	public void removeAllGroups() {
 		//check existence
-		SortedListOf<GroupData> oldList = app.getModel().getGroups();
+		SortedListOf<GroupData> oldList = app.getGroupHelper().getUiGroups();
 		if(oldList.size()==0){
 			//...
 		}
 		else{
 			do {
 				//save old
-				oldList = app.getModel().getGroups();
+				oldList = new SortedListOf<GroupData>(app.getHibernateHelper().listGroups());
 				int index = app.getCommonHelper().chooseRandom(oldList);
 				//actions
 				app.getGroupHelper().deleteGroup(index);//or we can use a constant
 				//save new
-				SortedListOf<GroupData> newList = app.getModel().getGroups();
+				SortedListOf<GroupData> newList = new SortedListOf<GroupData>(app.getHibernateHelper().listGroups());
 				//compare states
-				assertThat(newList, equalTo(oldList));	//.without(index)
+				assertThat(newList, equalTo(oldList.without(index)));	//
 			} while(oldList.size()>0);
 		}		
 	}

@@ -11,13 +11,13 @@ public class GroupModificationTests extends Base{
 	public void modifySomeGroup(GroupData group) {
 		app.getGroupHelper().checkExistance();
 		//save old
-		SortedListOf<GroupData> oldList = app.getModel().getGroups();
+		SortedListOf<GroupData> oldList = new SortedListOf<GroupData>(app.getHibernateHelper().listGroups());
 		int index = app.getCommonHelper().chooseRandom(oldList);
 		//action	    
 		app.getGroupHelper().modifyGroup(index,group);
 		//save new
-		SortedListOf<GroupData> newList = app.getModel().getGroups();
+		SortedListOf<GroupData> newList = new SortedListOf<GroupData>(app.getHibernateHelper().listGroups());
 	    //compare states
-		assertThat(newList, equalTo(oldList));//.without(index).withAdded(group)
+		assertThat(newList, equalTo(oldList.without(index).withAdded(group)));//
 	}
 }

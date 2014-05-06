@@ -10,8 +10,6 @@ public class ApplicationModel {
 	
 	private SortedListOf<GroupData> groups;
 	private List<GroupData> listGroups;
-	private SortedListOf<ContactData> contacts;
-	private List<GroupData> listContacts;
 	
 	//==========================================================================
 	
@@ -31,25 +29,5 @@ public class ApplicationModel {
 	public ApplicationModel remouveGroup(int index) {
 		groups.remove(index);	
 		return this;
-	}
-	
-	//===============================================================================
-	
-	public SortedListOf<ContactData> getContacts() {
-		return contacts;
-	}
-	
-	public void setContacts(List<ContactData> contacts){
-		this.contacts = new SortedListOf<ContactData>(contacts);
-	}
-
-	public ApplicationModel addContact(ContactData contact) {
-		contacts.add(contact);	
-		return this;
-	}
-
-	public ApplicationModel remouveContact(int index) {
-		contacts.remove(index);	
-		return this;
-	}
+	}	
 }
