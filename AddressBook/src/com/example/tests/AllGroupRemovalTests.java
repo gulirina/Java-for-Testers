@@ -23,9 +23,10 @@ public class AllGroupRemovalTests extends Base{
 				//actions
 				app.getGroupHelper().deleteGroup(index);//or we can use a constant
 				//save new
-				SortedListOf<GroupData> newList = new SortedListOf<GroupData>(app.getHibernateHelper().listGroups());
+				SortedListOf<GroupData> newList = app.getGroupHelper().getUiGroups();
 				//compare states
-				assertThat(newList, equalTo(oldList.without(index)));	//
+				assertThat(newList, equalTo(oldList.without(index)));	
+				oldList = new SortedListOf<GroupData>(app.getHibernateHelper().listGroups());
 			} while(oldList.size()>0);
 		}		
 	}

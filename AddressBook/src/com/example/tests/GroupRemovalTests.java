@@ -16,7 +16,7 @@ public class GroupRemovalTests extends Base {
 		//actions
 		app.getGroupHelper().deleteGroup(index);			
 		//save new
-		SortedListOf<GroupData> newList = new SortedListOf<GroupData>(app.getHibernateHelper().listGroups());
+		SortedListOf<GroupData> newList = app.getGroupHelper().getUiGroups();
 		//compare states
 		assertThat(newList, equalTo(oldList.without(index)));		//
 	}

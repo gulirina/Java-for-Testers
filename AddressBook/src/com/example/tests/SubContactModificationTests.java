@@ -15,7 +15,7 @@ public class SubContactModificationTests extends Base {
 		//action
 		app.getContactHelper().subModifyContact(index, contact);
 		//save new state
-		SortedListOf<ContactData> newList = new SortedListOf<ContactData>(app.getHibernateHelper().listContacts());
+		SortedListOf<ContactData> newList = app.getContactHelper().getUiContacts();
 	    //compare states
 		assertThat(newList, equalTo(oldList.without(index-1).withAdded(contact)));
 	}

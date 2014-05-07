@@ -16,15 +16,14 @@ public class AllContactsRemovalTests extends Base {
 		}
 		else{
 			do {
-				//save old
-				oldList = new SortedListOf<ContactData>(app.getHibernateHelper().listContacts());
 				int index = 1 + app.getCommonHelper().chooseRandom(oldList);
 				//action
 				app.getContactHelper().deleteContact(index);
 				//save new
-				SortedListOf<ContactData> newList = new SortedListOf<ContactData>(app.getHibernateHelper().listContacts());
+				SortedListOf<ContactData> newList = app.getContactHelper().getUiContacts();
 				//compare states
 				assertThat(newList, equalTo(oldList.without(index-1)));
+				oldList = new SortedListOf<ContactData>(app.getHibernateHelper().listContacts());
 			} while(oldList.size()!=0);
 		}
 	}

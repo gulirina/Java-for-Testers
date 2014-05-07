@@ -16,7 +16,7 @@ public class GroupModificationTests extends Base{
 		//action	    
 		app.getGroupHelper().modifyGroup(index,group);
 		//save new
-		SortedListOf<GroupData> newList = new SortedListOf<GroupData>(app.getHibernateHelper().listGroups());
+		SortedListOf<GroupData> newList = app.getGroupHelper().getUiGroups();
 	    //compare states
 		assertThat(newList, equalTo(oldList.without(index).withAdded(group)));//
 	}
