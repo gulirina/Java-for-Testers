@@ -18,14 +18,14 @@ public class AllGroupRemovalTests extends Base{
 		else{
 			do {
 				//save old
-				oldList = new SortedListOf<GroupData>(app.getHibernateHelper().listGroups());
+				oldList = app.getModel().getGroups();
 				int index = app.getCommonHelper().chooseRandom(oldList);
 				//actions
 				app.getGroupHelper().deleteGroup(index);//or we can use a constant
 				//save new
-				SortedListOf<GroupData> newList = app.getGroupHelper().getUiGroups();
+				SortedListOf<GroupData> newList = app.getModel().getGroups();
 				//compare states
-				assertThat(newList, equalTo(oldList.without(index)));	
+				assertThat(newList, equalTo(oldList));	
 				oldList = new SortedListOf<GroupData>(app.getHibernateHelper().listGroups());
 			} while(oldList.size()>0);
 		}		

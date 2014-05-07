@@ -10,13 +10,14 @@ public class ContactRemovalTests extends Base {
 	public void deleteSomeContact(){
 		app.getContactHelper().checkExistance();		
 		//save old
-		SortedListOf<ContactData> oldList= new SortedListOf<ContactData>(app.getHibernateHelper().listContacts());
+		SortedListOf<ContactData> oldList= app.getModel().getContacts();
 		int index = 1 + app.getCommonHelper().chooseRandom(oldList);
 		//action
 		app.getContactHelper().deleteContact(index);		
 		//save new
-		SortedListOf<ContactData> newList = app.getContactHelper().getUiContacts();
+		SortedListOf<ContactData> newList = app.getModel().getContacts();
 		//compare states
-		assertThat(newList, equalTo(oldList.without(index-1)));
+		assertThat(newList, equalTo(oldList));
+		check—onformityBetween("contactLists");
 	}	
 }

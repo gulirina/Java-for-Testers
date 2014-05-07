@@ -32,16 +32,9 @@ public class GroupCreationTests extends Base{
 	    //compare states
 	    assertThat(newList, equalTo(oldList));//.withAdded(group)
 	    
-	    if("yes".equals(app.getProperty("check.db"))){
-	    	if(wantToCheck()){
-		    	 assertThat(app.getModel().getGroups(), equalTo(app.getHibernateHelper().listGroups())); 	
-	    	}
-	    }
-	    if("yes".equals(app.getProperty("check.ui"))){
-	    	if(wantToCheck()){
-	    		assertThat(app.getModel().getGroups(), equalTo(app.getGroupHelper().getUiGroups()));
-	    	}
-	    }	    
+	    check—onformityBetween("groupLists");
 	}
+
+	
 }
 

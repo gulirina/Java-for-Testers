@@ -2,6 +2,8 @@ package com.example.tests;
 
 import static com.example.tests.ContactDataGenerator.generateRandomContact;
 import static com.example.tests.GroupDataGenerator.generateRandomGroups;
+import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertThat;
 
 import java.io.File;
 import java.io.FileReader;
@@ -32,6 +34,11 @@ public class Base {
 		checkFrequency = Integer.parseInt(properties.getProperty("checkFrequency","0"));
 	}
 	
+	@AfterTest 
+	public void tearDown() throws Exception {
+		app.stop();
+	}
+	
 	protected boolean wantToCheck(){
 		checkCounter++;
 		if(checkCounter>checkFrequency){
@@ -41,11 +48,28 @@ public class Base {
 			return false;
 		}
 	}
-		
-	@AfterTest 
-	public void tearDown() throws Exception {
-		app.stop();
+	
+	public void check—onformityBetween(String list) {
+		if(wantToCheck()){
+			if(list=="groupLists"){
+				if("yes".equals(app.getProperty("check.db"))){		    	
+				    assertThat(app.getModel().getGroups(), equalTo(app.getHibernateHelper().listGroups())); 		    	
+			    }
+			    if("yes".equals(app.getProperty("check.ui"))){		    	
+			    	assertThat(app.getModel().getGroups(), equalTo(app.getGroupHelper().getUiGroups()));		    	
+			    }
+			}
+			if(list=="contactLists"){
+				if("yes".equals(app.getProperty("check.db"))){		    	
+				    assertThat(app.getModel().getContacts(), equalTo(app.getHibernateHelper().listContacts())); 		    	
+			    }
+			    if("yes".equals(app.getProperty("check.ui"))){		    	
+			    	assertThat(app.getModel().getContacts(), equalTo(app.getContactHelper().getUiContacts()));		    	
+			    }
+			}		    
+		}
 	}
+		
 	//========================================================================
 	
 	@DataProvider

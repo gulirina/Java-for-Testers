@@ -3,6 +3,8 @@ package com.example.fw;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
+import com.example.tests.ContactData;
 import com.example.tests.GroupData;
 import com.example.utils.SortedListOf;
 
@@ -26,7 +28,7 @@ public class GroupHelper extends WebDriverHelperBase{
 	}
 	
 	public void checkExistance() {
-		SortedListOf<GroupData> list =  getUiGroups();
+		SortedListOf<GroupData> list = new SortedListOf<GroupData>(manager.getHibernateHelper().listGroups());
 		 if(list.size()==0){
 			GroupData group = new GroupData();
 			createGroup(group);
